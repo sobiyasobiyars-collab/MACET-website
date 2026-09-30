@@ -1,0 +1,1032 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MACET Admin Dashboard</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7fb;
+            color: #222;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background: #ffffff;
+            min-height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 5%;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-box img {
+            width: 55px;
+            height: 55px;
+            object-fit: contain;
+        }
+
+        .college-name h2 {
+            color: #123c75;
+            font-size: 23px;
+        }
+
+        .college-name span {
+            color: #666;
+            font-size: 12px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 22px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: #0b63ce;
+        }
+
+        .menu-button {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /* HEADER */
+        .dashboard-header {
+            background: linear-gradient(135deg, #0d47a1, #1976d2);
+            color: white;
+            padding: 45px 5%;
+        }
+
+        .dashboard-header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .dashboard-header p {
+            opacity: 0.9;
+        }
+
+        /* MAIN */
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 35px auto;
+        }
+
+        .top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .top-row h2 {
+            color: #123c75;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            border: none;
+            cursor: pointer;
+        }
+
+        .refresh-btn,
+        .logout-btn {
+            padding: 10px 18px;
+            border-radius: 7px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .refresh-btn {
+            background: #1976d2;
+        }
+
+        .logout-btn {
+            background: #dc3545;
+        }
+
+        /* STATS */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+        }
+
+        .stat-card h3 {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .stat-card h2 {
+            color: #0d47a1;
+            font-size: 28px;
+        }
+
+        /* FILTER AREA */
+        .filter-box {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+            margin-bottom: 25px;
+
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .search-box,
+        .course-filter {
+            flex: 1;
+            min-width: 220px;
+        }
+
+        .filter-box input,
+        .filter-box select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ddd;
+            border-radius: 7px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .filter-box input:focus,
+        .filter-box select:focus {
+            border-color: #1976d2;
+        }
+
+        /* TABLE */
+        .table-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1100px;
+        }
+
+        th {
+            background: #0d47a1;
+            color: white;
+            padding: 14px;
+            text-align: left;
+            font-size: 13px;
+        }
+
+        td {
+            padding: 13px;
+            border-bottom: 1px solid #eee;
+            font-size: 13px;
+        }
+
+        tr:hover {
+            background: #f7faff;
+        }
+
+        .view-btn {
+            background: #198754;
+            color: white;
+            padding: 7px 12px;
+            border-radius: 5px;
+            margin-right: 5px;
+        }
+
+        .delete-btn {
+            background: #dc3545;
+            color: white;
+            padding: 7px 12px;
+            border-radius: 5px;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 30px;
+            color: #777;
+        }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 500;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            width: 100%;
+            max-width: 650px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 15px;
+            padding: 30px;
+            position: relative;
+        }
+
+        .modal-content h2 {
+            color: #0d47a1;
+            margin-bottom: 20px;
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 28px;
+            background: none;
+            color: #555;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .detail {
+            background: #f5f7fa;
+            padding: 13px;
+            border-radius: 7px;
+        }
+
+        .detail.full {
+            grid-column: 1 / -1;
+        }
+
+        .detail strong {
+            display: block;
+            color: #555;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .detail span {
+            color: #222;
+            font-size: 14px;
+        }
+
+        /* FOOTER */
+        footer {
+            margin-top: 50px;
+            background: #0d47a1;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        /* MOBILE */
+        @media (max-width: 900px) {
+            .menu-button {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 75px;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.show-menu {
+                display: flex;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .top-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .dashboard-header h1 {
+                font-size: 25px;
+            }
+
+            .container {
+                width: 94%;
+            }
+
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .detail.full {
+                grid-column: auto;
+            }
+
+            .buttons {
+                width: 100%;
+            }
+
+            .refresh-btn,
+            .logout-btn {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+
+    <div class="logo-section">
+
+        <div class="logo-box">
+            <img src="images/logo.png" alt="MACET Logo">
+        </div>
+
+        <div class="college-name">
+            <h2>MACET</h2>
+            <span>Engineering & Technology</span>
+        </div>
+
+    </div>
+
+    <button class="menu-button" onclick="toggleMenu()">☰</button>
+
+    <nav class="nav-links" id="navLinks">
+
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="courses.html">Courses</a>
+        <a href="admission.html">Admission</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html">Logout</a>
+
+    </nav>
+
+</header>
+
+
+<!-- DASHBOARD HEADER -->
+<section class="dashboard-header">
+
+    <h1>Admin Dashboard</h1>
+
+    <p>
+        Manage and view student admission applications
+    </p>
+
+</section>
+
+
+<!-- MAIN -->
+<main class="container">
+
+    <div class="top-row">
+
+        <h2>Admission Applications</h2>
+
+        <div class="buttons">
+
+            <button class="refresh-btn" onclick="loadAdmissions()">
+                🔄 Refresh
+            </button>
+
+            <button class="logout-btn" onclick="logout()">
+                Logout
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- STATS -->
+    <div class="stats">
+
+        <div class="stat-card">
+
+            <h3>Total Applications</h3>
+
+            <h2 id="totalCount">0</h2>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h3>Institution</h3>
+
+            <h2>MACET</h2>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h3>Dashboard Status</h3>
+
+            <h2>Active</h2>
+
+        </div>
+
+    </div>
+
+
+    <!-- SEARCH & FILTER -->
+    <div class="filter-box">
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="🔎 Search by name, email or mobile..."
+                oninput="filterAdmissions()"
+            >
+
+        </div>
+
+
+        <div class="course-filter">
+
+            <select id="courseFilter" onchange="filterAdmissions()">
+
+                <option value="">🎓 All Courses</option>
+
+                <option value="Artificial Intelligence & Data Science">
+                    Artificial Intelligence & Data Science
+                </option>
+
+                <option value="Computer Science & Engineering">
+                    Computer Science & Engineering
+                </option>
+
+                <option value="Electronics & Communication Engineering">
+                    Electronics & Communication Engineering
+                </option>
+
+                <option value="Electrical & Electronics Engineering">
+                    Electrical & Electronics Engineering
+                </option>
+
+                <option value="Mechanical Engineering">
+                    Mechanical Engineering
+                </option>
+
+                <option value="Civil Engineering">
+                    Civil Engineering
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <!-- TABLE -->
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>S.No</th>
+                    <th>Student Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>DOB</th>
+                    <th>Course</th>
+                    <th>Community</th>
+                    <th>Percentage</th>
+                    <th>Year</th>
+                    <th>Address</th>
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="admissionTable">
+
+                <tr>
+                    <td colspan="11" class="no-data">
+                        Loading applications...
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</main>
+
+
+<!-- VIEW DETAILS MODAL -->
+<div class="modal" id="detailsModal">
+
+    <div class="modal-content">
+
+        <button class="close-btn" onclick="closeDetails()">
+            ×
+        </button>
+
+        <h2>Student Admission Details</h2>
+
+        <div class="detail-grid">
+
+            <div class="detail">
+                <strong>Student Name</strong>
+                <span id="detailName">-</span>
+            </div>
+
+            <div class="detail">
+                <strong>Email</strong>
+                <span id="detailEmail">-</span>
+            </div>
+
+            <div class="detail">
+                <strong>Mobile</strong>
+                <span id="detailMobile">-</span>
+            </div>
+
+            <div class="detail">
+                <strong>Date of Birth</strong>
+                <span id="detailDob">-</span>
+            </div>
+
+            <div class="detail">
+                <strong>Course</strong>
+                <span id="detailCourse">-</span>
+            </div>
+
+            <div class="detail">
+                <strong>Community</strong>
+                <span id="detailCommunity">-</span>
+            </div>
+
+            <div class="detail">
+                <strong>Percentage</strong>
+                <span id="detailPercentage">-</span>
+            </div>
+
+            <div class="detail">
+                <strong>Year</strong>
+                <span id="detailYear">-</span>
+            </div>
+
+            <div class="detail full">
+                <strong>Address</strong>
+                <span id="detailAddress">-</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- FOOTER -->
+<footer>
+
+    <p>
+        © <span class="current-year"></span>
+        Marthandam College of Engineering and Technology
+    </p>
+
+</footer>
+
+
+<script>
+
+    let allAdmissions = [];
+
+
+    /* MOBILE MENU */
+
+    function toggleMenu() {
+
+        const nav = document.getElementById("navLinks");
+
+        nav.classList.toggle("show-menu");
+
+    }
+
+
+    /* LOAD ADMISSIONS */
+
+    async function loadAdmissions() {
+
+        const table = document.getElementById("admissionTable");
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="11" class="no-data">
+                    Loading applications...
+                </td>
+            </tr>
+        `;
+
+        try {
+
+            const response = await fetch("/api/admissions");
+
+            if (!response.ok) {
+                throw new Error("Failed to fetch admissions");
+            }
+
+            allAdmissions = await response.json();
+
+            document.getElementById("totalCount").textContent =
+                allAdmissions.length;
+
+            displayAdmissions(allAdmissions);
+
+        } catch (error) {
+
+            console.error(error);
+
+            table.innerHTML = `
+                <tr>
+                    <td colspan="11" class="no-data">
+                        ❌ Unable to load admission applications.
+                    </td>
+                </tr>
+            `;
+
+        }
+
+    }
+
+
+    /* DISPLAY DATA */
+
+    function displayAdmissions(data) {
+
+        const table = document.getElementById("admissionTable");
+
+        table.innerHTML = "";
+
+        if (data.length === 0) {
+
+            table.innerHTML = `
+                <tr>
+                    <td colspan="11" class="no-data">
+                        No applications found.
+                    </td>
+                </tr>
+            `;
+
+            return;
+
+        }
+
+
+        data.forEach((student, index) => {
+
+            const row = document.createElement("tr");
+
+            row.innerHTML = `
+
+                <td>${index + 1}</td>
+
+                <td>${escapeHTML(student.studentName)}</td>
+
+                <td>${escapeHTML(student.email)}</td>
+
+                <td>${escapeHTML(student.mobile)}</td>
+
+                <td>${escapeHTML(student.dob)}</td>
+
+                <td>${escapeHTML(student.course)}</td>
+
+                <td>${escapeHTML(student.community)}</td>
+
+                <td>${escapeHTML(student.percentage)}</td>
+
+                <td>${escapeHTML(student.year)}</td>
+
+                <td>${escapeHTML(student.address)}</td>
+
+                <td>
+
+                    <button
+                        class="view-btn"
+                        onclick="viewDetails('${student._id}')"
+                    >
+                        View
+                    </button>
+
+                    <button
+                        class="delete-btn"
+                        onclick="deleteAdmission('${student._id}')"
+                    >
+                        Delete
+                    </button>
+
+                </td>
+
+            `;
+
+            table.appendChild(row);
+
+        });
+
+    }
+
+
+    /* SEARCH + COURSE FILTER */
+
+    function filterAdmissions() {
+
+        const search =
+            document
+                .getElementById("searchInput")
+                .value
+                .toLowerCase()
+                .trim();
+
+        const course =
+            document
+                .getElementById("courseFilter")
+                .value;
+
+
+        const filtered = allAdmissions.filter(student => {
+
+            const matchesSearch =
+                (student.studentName || "")
+                    .toLowerCase()
+                    .includes(search)
+
+                ||
+
+                (student.email || "")
+                    .toLowerCase()
+                    .includes(search)
+
+                ||
+
+                (student.mobile || "")
+                    .toLowerCase()
+                    .includes(search);
+
+
+            const matchesCourse =
+                course === "" ||
+                student.course === course;
+
+
+            return matchesSearch && matchesCourse;
+
+        });
+
+
+        displayAdmissions(filtered);
+
+    }
+
+
+    /* VIEW DETAILS */
+
+    function viewDetails(id) {
+
+        const student =
+            allAdmissions.find(item => item._id === id);
+
+        if (!student) {
+            return;
+        }
+
+
+        document.getElementById("detailName").textContent =
+            student.studentName || "-";
+
+        document.getElementById("detailEmail").textContent =
+            student.email || "-";
+
+        document.getElementById("detailMobile").textContent =
+            student.mobile || "-";
+
+        document.getElementById("detailDob").textContent =
+            student.dob || "-";
+
+        document.getElementById("detailCourse").textContent =
+            student.course || "-";
+
+        document.getElementById("detailCommunity").textContent =
+            student.community || "-";
+
+        document.getElementById("detailPercentage").textContent =
+            student.percentage || "-";
+
+        document.getElementById("detailYear").textContent =
+            student.year || "-";
+
+        document.getElementById("detailAddress").textContent =
+            student.address || "-";
+
+
+        document
+            .getElementById("detailsModal")
+            .classList.add("show");
+
+    }
+
+
+    /* CLOSE DETAILS */
+
+    function closeDetails() {
+
+        document
+            .getElementById("detailsModal")
+            .classList.remove("show");
+
+    }
+
+
+    /* DELETE */
+
+    async function deleteAdmission(id) {
+
+        const confirmDelete =
+            confirm("Are you sure you want to delete this application?");
+
+        if (!confirmDelete) {
+            return;
+        }
+
+
+        try {
+
+            const response =
+                await fetch("/api/admissions/" + id, {
+                    method: "DELETE"
+                });
+
+
+            const result = await response.json();
+
+
+            if (response.ok) {
+
+                alert(
+                    result.message ||
+                    "Application deleted successfully!"
+                );
+
+                loadAdmissions();
+
+            } else {
+
+                alert(
+                    result.message ||
+                    "Unable to delete application."
+                );
+
+            }
+
+        } catch (error) {
+
+            console.error(error);
+
+            alert("Server connection error.");
+
+        }
+
+    }
+
+
+    /* LOGOUT */
+
+    function logout() {
+
+        window.location.href = "login.html";
+
+    }
+
+
+    /* ESCAPE HTML */
+
+    function escapeHTML(value) {
+
+        if (value === undefined || value === null) {
+            return "";
+        }
+
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+    }
+
+
+    /* CLOSE MODAL WHEN CLICKING OUTSIDE */
+
+    window.addEventListener("click", function(event) {
+
+        const modal =
+            document.getElementById("detailsModal");
+
+        if (event.target === modal) {
+            closeDetails();
+        }
+
+    });
+
+
+    /* ESC KEY */
+
+    document.addEventListener("keydown", function(event) {
+
+        if (event.key === "Escape") {
+            closeDetails();
+        }
+
+    });
+
+
+    /* CURRENT YEAR */
+
+    document.querySelector(".current-year").textContent =
+        new Date().getFullYear();
+
+
+    /* LOAD DATA WHEN PAGE OPENS */
+
+    loadAdmissions();
+
+</script>
+
+</body>
+</html>
