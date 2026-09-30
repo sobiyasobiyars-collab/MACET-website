@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Registration - MACET</title>
+
+```
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        min-height: 100vh;
+        background:
+            linear-gradient(
+                rgba(0, 45, 80, 0.82),
+                rgba(0, 80, 125, 0.88)
+            ),
+            url("images/campus.jpg") center/cover fixed;
+    }
+
+    /* ================= NAVBAR ================= */
+
+    .navbar {
+        min-height: 76px;
+        padding: 8px 6%;
+        background: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 3px 15px rgba(0,0,0,0.15);
+    }
+
+    .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .logo-section img {
+        width: 55px;
+        height: 55px;
+        object-fit: contain;
+    }
+
+    .logo-section h2 {
+        color: #06416d;
+    }
+
+    .logo-section span {
+        color: #777;
+        font-size: 12px;
+    }
+
+    .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 8px;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 600;
+        padding: 10px 14px;
+        border-radius: 7px;
+    }
+
+    .nav-links a:hover {
+        background: #e8f4fb;
+        color: #00679f;
+    }
+
+    /* ================= REGISTER AREA ================= */
+
+    .register-section {
+        min-height: calc(100vh - 76px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px 20px;
+    }
+
+    .register-card {
+        width: 100%;
+        max-width: 500px;
+        background: white;
+        padding: 35px;
+        border-radius: 20px;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.30);
+    }
+
+    .top {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .icon {
+        width: 70px;
+        height: 70px;
+        margin: 0 auto 15px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #00669f, #00a5d5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 32px;
+    }
+
+    .top h1 {
+        color: #06416d;
+        font-size: 27px;
+        margin-bottom: 7px;
+    }
+
+    .top p {
+        color: #777;
+        font-size: 14px;
+    }
+
+    .step {
+        margin: 22px 0 12px;
+        color: #06416d;
+        font-weight: bold;
+    }
+
+    .step span {
+        display: inline-flex;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: #00669f;
+        color: white;
+        justify-content: center;
+        align-items: center;
+        margin-right: 7px;
+    }
+
+    .form-group {
+        margin-bottom: 17px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 7px;
+        font-weight: 600;
+        font-size: 14px;
+        color: #333;
+    }
+
+    .input {
+        width: 100%;
+        height: 48px;
+        border: 1px solid #d3dbe2;
+        border-radius: 9px;
+        padding: 0 14px;
+        font-size: 14px;
+        outline: none;
+    }
+
+    .input:focus {
+        border-color: #0085c7;
+        box-shadow: 0 0 0 3px rgba(0,133,199,0.1);
+    }
+
+    .otp-row {
+        display: flex;
+        gap: 8px;
+    }
+
+    .otp-row .input {
+        flex: 1;
+    }
+
+    button {
+        border: none;
+        cursor: pointer;
+    }
+
+    .otp-btn {
+        background: #06416d;
+        color: white;
+        padding: 0 18px;
+        border-radius: 9px;
+        font-weight: bold;
+        min-width: 110px;
+    }
+
+    .otp-btn:hover {
+        background: #00588e;
+    }
+
+    .otp-btn:disabled,
+    .create-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    .create-btn {
+        width: 100%;
+        height: 50px;
+        border-radius: 9px;
+        background: linear-gradient(135deg, #00669f, #009bc8);
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 5px;
+    }
+
+    .create-btn:hover {
+        opacity: 0.92;
+    }
+
+    /* HIDDEN SECTIONS */
+
+    #otpSection,
+    #accountSection {
+        display: none;
+    }
+
+    #registerMessage {
+        min-height: 24px;
+        text-align: center;
+        margin-top: 15px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .login-link {
+        text-align: center;
+        border-top: 1px solid #eee;
+        margin-top: 20px;
+        padding-top: 18px;
+        color: #777;
+        font-size: 14px;
+    }
+
+    .login-link a {
+        display: inline-block;
+        margin-top: 7px;
+        color: #00669f;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .back {
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    .back a {
+        text-decoration: none;
+        color: #777;
+        font-size: 13px;
+    }
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 800px) {
+        .nav-links {
+            display: none;
+        }
+    }
+
+    @media (max-width: 500px) {
+        .register-card {
+            padding: 25px 20px;
+        }
+
+        .otp-row {
+            flex-direction: column;
+        }
+
+        .otp-btn {
+            height: 48px;
+            width: 100%;
+        }
+
+        .logo-section span {
+            display: none;
+        }
+
+        .top h1 {
+            font-size: 23px;
+        }
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<!-- ================= NAVBAR ================= -->
+
+<header>
+    <nav class="navbar">
+
+        <div class="logo-section">
+
+            <img
+                src="images/logo.png"
+                alt="MACET Logo"
+            >
+
+            <div>
+                <h2>MACET</h2>
+                <span>Engineering & Technology</span>
+            </div>
+
+        </div>
+
+        <ul class="nav-links">
+
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+
+            <li>
+                <a href="about.html">About</a>
+            </li>
+
+            <li>
+                <a href="courses.html">Courses</a>
+            </li>
+
+            <li>
+                <a href="admission.html">Admission</a>
+            </li>
+
+            <li>
+                <a href="contact.html">Contact</a>
+            </li>
+
+        </ul>
+
+    </nav>
+</header>
+
+
+<!-- ================= REGISTER ================= -->
+
+<section class="register-section">
+
+    <div class="register-card">
+
+        <!-- TOP -->
+
+        <div class="top">
+
+            <div class="icon">
+                📝
+            </div>
+
+            <h1>
+                Create Admin Account
+            </h1>
+
+            <p>
+                Register to access the MACET administration portal
+            </p>
+
+        </div>
+
+
+        <!-- ================= STEP 1 ================= -->
+
+        <div class="step">
+            <span>1</span>
+            Verify Mobile Number
+        </div>
+
+        <div class="form-group">
+
+            <label for="mobile">
+                Mobile Number
+            </label>
+
+            <div class="otp-row">
+
+                <input
+                    class="input"
+                    type="tel"
+                    id="mobile"
+                    maxlength="10"
+                    inputmode="numeric"
+                    placeholder="Enter 10-digit mobile number"
+                >
+
+                <button
+                    class="otp-btn"
+                    type="button"
+                    id="sendOtpBtn"
+                >
+                    Send OTP
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= OTP ================= -->
+
+        <div id="otpSection">
+
+            <div class="form-group">
+
+                <label for="otp">
+                    Enter OTP
+                </label>
+
+                <div class="otp-row">
+
+                    <input
+                        class="input"
+                        type="text"
+                        id="otp"
+                        maxlength="6"
+                        inputmode="numeric"
+                        placeholder="Enter 6-digit OTP"
+                    >
+
+                    <button
+                        class="otp-btn"
+                        type="button"
+                        id="verifyOtpBtn"
+                    >
+                        Verify
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= STEP 2 ================= -->
+
+        <div id="accountSection">
+
+            <div class="step">
+                <span>2</span>
+                Create Account
+            </div>
+
+
+            <!-- USERNAME -->
+
+            <div class="form-group">
+
+                <label for="username">
+                    Username
+                </label>
+
+                <input
+                    class="input"
+                    type="text"
+                    id="username"
+                    placeholder="Create username"
+                >
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    class="input"
+                    type="password"
+                    id="password"
+                    placeholder="Create password"
+                >
+
+            </div>
+
+
+            <!-- CONFIRM PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="confirmPassword">
+                    Confirm Password
+                </label>
+
+                <input
+                    class="input"
+                    type="password"
+                    id="confirmPassword"
+                    placeholder="Confirm password"
+                >
+
+            </div>
+
+
+            <!-- CREATE ACCOUNT -->
+
+            <button
+                class="create-btn"
+                type="button"
+                id="createAccountBtn"
+            >
+                Create Account
+            </button>
+
+        </div>
+
+
+        <!-- MESSAGE -->
+
+        <div id="registerMessage"></div>
+
+
+        <!-- LOGIN -->
+
+        <div class="login-link">
+
+            Already have an admin account?
+
+            <br>
+
+            <a href="login.html">
+                Login Here
+            </a>
+
+        </div>
+
+
+        <!-- BACK -->
+
+        <div class="back">
+
+            <a href="index.html">
+                ← Back to Home
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const mobileInput =
+            document.getElementById("mobile");
+
+        const otpInput =
+            document.getElementById("otp");
+
+        const sendOtpBtn =
+            document.getElementById("sendOtpBtn");
+
+        const verifyOtpBtn =
+            document.getElementById("verifyOtpBtn");
+
+        const createAccountBtn =
+            document.getElementById("createAccountBtn");
+
+        const otpSection =
+            document.getElementById("otpSection");
+
+        const accountSection =
+            document.getElementById("accountSection");
+
+        const registerMessage =
+            document.getElementById("registerMessage");
+
+
+        /* ================= SEND OTP ================= */
+
+        sendOtpBtn.addEventListener(
+            "click",
+            async function () {
+
+                const mobile =
+                    mobileInput.value.trim();
+
+                if (!/^[0-9]{10}$/.test(mobile)) {
+
+                    alert(
+                        "Please enter a valid 10-digit mobile number."
+                    );
+
+                    mobileInput.focus();
+
+                    return;
+                }
+
+
+                sendOtpBtn.disabled = true;
+
+                sendOtpBtn.textContent =
+                    "Sending...";
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            "/send-otp",
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body: JSON.stringify({
+                                    mobile: mobile
+                                })
+                            }
+                        );
+
+
+                    const data =
+                        await response.json();
+
+
+                    if (data.success) {
+
+                        alert(
+                            "OTP generated successfully!\n\n" +
+                            "Please check the Backend PowerShell terminal."
+                        );
+
+                        otpSection.style.display =
+                            "block";
+
+                        otpInput.focus();
+
+                    } else {
+
+                        alert(
+                            data.message ||
+                            "OTP generation failed."
+                        );
+                    }
+
+                } catch (error) {
+
+                    console.error(
+                        "Send OTP Error:",
+                        error
+                    );
+
+                    alert(
+                        "Cannot connect to server.\n\n" +
+                        "Please make sure node server.js is running."
+                    );
+
+                } finally {
+
+                    sendOtpBtn.disabled = false;
+
+                    sendOtpBtn.textContent =
+                        "Send OTP";
+                }
+
+            }
+        );
+
+
+        /* ================= VERIFY OTP ================= */
+
+        verifyOtpBtn.addEventListener(
+            "click",
+            async function () {
+
+                const mobile =
+                    mobileInput.value.trim();
+
+                const otp =
+                    otpInput.value.trim();
+
+
+                if (!/^[0-9]{6}$/.test(otp)) {
+
+                    alert(
+                        "Please enter the 6-digit OTP."
+                    );
+
+                    otpInput.focus();
+
+                    return;
+                }
+
+
+                verifyOtpBtn.disabled = true;
+
+                verifyOtpBtn.textContent =
+                    "Verifying...";
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            "/verify-otp",
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body: JSON.stringify({
+                                    mobile: mobile,
+                                    otp: otp
+                                })
+                            }
+                        );
+
+
+                    const data =
+                        await response.json();
+
+
+                    if (data.success) {
+
+                        alert(
+                            "Mobile number verified successfully!"
+                        );
+
+                        otpSection.style.display =
+                            "none";
+
+                        accountSection.style.display =
+                            "block";
+
+                        registerMessage.textContent =
+                            "Mobile number verified ✓";
+
+                        registerMessage.style.color =
+                            "green";
+
+                    } else {
+
+                        alert(
+                            data.message ||
+                            "Invalid OTP."
+                        );
+                    }
+
+                } catch (error) {
+
+                    console.error(
+                        "Verify OTP Error:",
+                        error
+                    );
+
+                    alert(
+                        "Cannot connect to server."
+                    );
+
+                } finally {
+
+                    verifyOtpBtn.disabled = false;
+
+                    verifyOtpBtn.textContent =
+                        "Verify";
+                }
+
+            }
+        );
+
+
+        /* ================= CREATE ACCOUNT ================= */
+
+        createAccountBtn.addEventListener(
+            "click",
+            async function () {
+
+                const mobile =
+                    mobileInput.value.trim();
+
+                const username =
+                    document.getElementById(
+                        "username"
+                    ).value.trim();
+
+                const password =
+                    document.getElementById(
+                        "password"
+                    ).value;
+
+                const confirmPassword =
+                    document.getElementById(
+                        "confirmPassword"
+                    ).value;
+
+
+                if (!username) {
+
+                    alert(
+                        "Please enter a username."
+                    );
+
+                    return;
+                }
+
+
+                if (!password) {
+
+                    alert(
+                        "Please enter a password."
+                    );
+
+                    return;
+                }
+
+
+                if (password !== confirmPassword) {
+
+                    alert(
+                        "Passwords do not match."
+                    );
+
+                    return;
+                }
+
+
+                createAccountBtn.disabled = true;
+
+                createAccountBtn.textContent =
+                    "Creating Account...";
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            "/create-admin",
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body: JSON.stringify({
+                                    mobile: mobile,
+                                    username: username,
+                                    password: password
+                                })
+                            }
+                        );
+
+
+                    const data =
+                        await response.json();
+
+
+                    if (data.success) {
+
+                        alert(
+                            "Admin account created successfully!"
+                        );
+
+                        window.location.href =
+                            "login.html";
+
+                    } else {
+
+                        alert(
+                            data.message ||
+                            "Account creation failed."
+                        );
+                    }
+
+                } catch (error) {
+
+                    console.error(
+                        "Create Account Error:",
+                        error
+                    );
+
+                    alert(
+                        "Cannot connect to server."
+                    );
+
+                } finally {
+
+                    createAccountBtn.disabled = false;
+
+                    createAccountBtn.textContent =
+                        "Create Account";
+                }
+
+            }
+        );
+
+    });
+
+</script>
+```
+
+</body>
+</html>

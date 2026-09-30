@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>Contact Us - MACET</title>
+
+<link rel="stylesheet" href="style.css">
+```
+
+</head>
+
+<body>
+
+```
+<!-- NAVBAR -->
+<header class="navbar">
+
+    <div class="logo-section">
+
+        <div class="logo-box">
+            <img src="images/logo.png" alt="MACET Logo">
+        </div>
+
+        <div class="college-name">
+            <h2>MACET</h2>
+            <span>Engineering & Technology</span>
+        </div>
+
+    </div>
+
+    <button class="menu-button" onclick="toggleMenu()">☰</button>
+
+    <nav class="nav-links" id="navLinks">
+
+        <a href="index.html">Home</a>
+
+        <a href="about.html">About</a>
+
+        <a href="courses.html">Courses</a>
+
+        <a href="admission.html">Admission</a>
+
+        <a href="contact.html" class="active">Contact</a>
+
+    </nav>
+
+</header>
+
+
+<!-- PAGE HEADER -->
+<section style="
+    padding: 100px 20px;
+    text-align: center;
+    background: #f5f8fc;
+">
+
+    <h1 style="
+        color: #003b70;
+        font-size: 45px;
+        margin-bottom: 15px;
+    ">
+        Contact Us
+    </h1>
+
+    <p style="
+        font-size: 18px;
+        color: #555;
+    ">
+        Get in touch with MACET
+    </p>
+
+</section>
+
+
+<!-- CONTACT SECTION -->
+<section style="
+    padding: 60px 6%;
+    background: white;
+">
+
+    <div style="
+        max-width: 1100px;
+        margin: auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    ">
+
+        <!-- CONTACT DETAILS -->
+        <div style="
+            padding: 30px;
+            border-radius: 15px;
+            background: #f5f8fc;
+        ">
+
+            <h2 style="
+                color:#003b70;
+                margin-bottom:20px;
+            ">
+                Get In Touch
+            </h2>
+
+            <p style="line-height:1.7;">
+                If you have any questions about admissions,
+                courses or college facilities, feel free to
+                contact MACET.
+            </p>
+
+            <br>
+
+            <h3>📍 College Address</h3>
+
+            <p style="line-height:1.7;">
+                Marthandam College of Engineering and Technology,<br>
+                College Road, Kuttakuzhi,<br>
+                Veeyannoor Post,<br>
+                Near Marthandam,<br>
+                Tamil Nadu - 629 177.
+            </p>
+
+            <br>
+
+            <h3>📞 Phone</h3>
+
+            <p style="line-height:1.7;">
+                04651 - 216791
+            </p>
+
+            <br>
+
+            <h3>✉️ Email</h3>
+
+            <p style="line-height:1.7;">
+                office@macet.edu.in
+            </p>
+
+            <br>
+
+            <h3>🕐 Office Hours</h3>
+
+            <p style="line-height:1.7;">
+                Monday - Saturday<br>
+                9:00 AM - 4:30 PM
+            </p>
+
+        </div>
+
+
+        <!-- CONTACT FORM -->
+        <div style="
+            padding: 30px;
+            border-radius: 15px;
+            background: #ffffff;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+        ">
+
+            <h2 style="color:#003b70;">
+                Send Us a Message
+            </h2>
+
+            <br>
+
+            <form id="contactForm">
+
+                <label>Your Name</label>
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter your name"
+                    required
+                    style="
+                        width:100%;
+                        padding:13px;
+                        margin:8px 0 18px;
+                        box-sizing:border-box;
+                        border:1px solid #ddd;
+                        border-radius:7px;
+                    "
+                >
+
+
+                <label>Email</label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    required
+                    style="
+                        width:100%;
+                        padding:13px;
+                        margin:8px 0 18px;
+                        box-sizing:border-box;
+                        border:1px solid #ddd;
+                        border-radius:7px;
+                    "
+                >
+
+
+                <label>Phone</label>
+
+                <input
+                    type="tel"
+                    id="phone"
+                    placeholder="Enter your phone number"
+                    required
+                    style="
+                        width:100%;
+                        padding:13px;
+                        margin:8px 0 18px;
+                        box-sizing:border-box;
+                        border:1px solid #ddd;
+                        border-radius:7px;
+                    "
+                >
+
+
+                <label>Subject</label>
+
+                <input
+                    type="text"
+                    id="subject"
+                    placeholder="Enter subject"
+                    required
+                    style="
+                        width:100%;
+                        padding:13px;
+                        margin:8px 0 18px;
+                        box-sizing:border-box;
+                        border:1px solid #ddd;
+                        border-radius:7px;
+                    "
+                >
+
+
+                <label>Message</label>
+
+                <textarea
+                    id="message"
+                    rows="5"
+                    placeholder="Write your message..."
+                    required
+                    style="
+                        width:100%;
+                        padding:13px;
+                        margin:8px 0 18px;
+                        box-sizing:border-box;
+                        border:1px solid #ddd;
+                        border-radius:7px;
+                        resize:vertical;
+                    "
+                ></textarea>
+
+
+                <button
+                    type="submit"
+                    style="
+                        width:100%;
+                        padding:14px;
+                        border:none;
+                        border-radius:8px;
+                        background:#0066cc;
+                        color:white;
+                        font-size:16px;
+                        cursor:pointer;
+                    "
+                >
+                    Send Message
+                </button>
+
+            </form>
+
+
+            <p id="successMessage"
+               style="
+                   text-align:center;
+                   color:green;
+                   margin-top:15px;
+                   font-weight:bold;
+               ">
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- GOOGLE MAP -->
+<section style="
+    padding:60px 20px;
+    text-align:center;
+    background:#f5f8fc;
+">
+
+    <h2 style="color:#003b70;">
+        Find Us
+    </h2>
+
+    <p style="margin-top:10px;">
+        📍 Kuttakuzhi, Near Marthandam, Tamil Nadu
+    </p>
+
+    <br>
+
+    <a
+        href="https://www.google.com/maps/search/Marthandam+College+of+Engineering+and+Technology"
+        target="_blank"
+        style="
+            display:inline-block;
+            padding:12px 25px;
+            background:#0066cc;
+            color:white;
+            text-decoration:none;
+            border-radius:8px;
+        "
+    >
+        Open in Google Maps →
+    </a>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+
+    <div class="footer-content">
+
+        <div>
+            <h3>MACET</h3>
+
+            <p>
+                Marthandam College of Engineering
+                and Technology
+            </p>
+        </div>
+
+
+        <div>
+            <h3>Quick Links</h3>
+
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="courses.html">Courses</a>
+            <a href="admission.html">Admission</a>
+            <a href="contact.html">Contact</a>
+        </div>
+
+
+        <div>
+            <h3>Contact</h3>
+
+            <p>📍 Kuttakuzhi, Tamil Nadu</p>
+
+            <p>📞 04651 - 216791</p>
+
+            <p>✉️ office@macet.edu.in</p>
+
+            <a href="login.html">
+                Admin Login
+            </a>
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 MACET. All Rights Reserved.
+        </p>
+
+    </div>
+
+</footer>
+
+
+<!-- COMMON SCRIPT -->
+<script src="script.js"></script>
+
+
+<!-- CONTACT FORM SCRIPT -->
+<script>
+
+    document
+        .getElementById("contactForm")
+        .addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            document.getElementById("successMessage")
+                .textContent =
+                "✅ Thank you! Your message has been received.";
+
+            this.reset();
+
+        });
+
+</script>
+
+</body>
+
+</html>

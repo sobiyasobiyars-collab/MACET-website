@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>Courses | MACET</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+    /* ================= COURSES PAGE ================= */
+
+    .courses-page {
+        background: #f5f8fc;
+        padding: 75px 6%;
+    }
+
+    .courses-section-inner {
+        max-width: 1150px;
+        margin: auto;
+    }
+
+    /* SECTION HEADING */
+
+    .section-heading {
+        text-align: center;
+        max-width: 750px;
+        margin: auto;
+    }
+
+    .section-label {
+        display: inline-block;
+        color: #1687e8;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 2px;
+        margin-bottom: 8px;
+    }
+
+    .section-heading h2 {
+        color: #123c73;
+        font-size: 36px;
+        margin-bottom: 10px;
+    }
+
+    .section-heading p {
+        color: #6b7280;
+        font-size: 15px;
+        line-height: 1.7;
+    }
+
+    /* COURSE GRID */
+
+    .course-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        margin-top: 40px;
+    }
+
+    .course-card {
+        position: relative;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 28px 25px;
+        min-height: 330px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        transition: 0.3s ease;
+    }
+
+    .course-card:hover {
+        transform: translateY(-7px);
+        border-color: #1687e8;
+        box-shadow: 0 15px 35px rgba(18, 60, 115, 0.12);
+    }
+
+    .course-icon {
+        width: 62px;
+        height: 62px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #eaf5ff;
+        border-radius: 14px;
+        font-size: 32px;
+        margin-bottom: 18px;
+    }
+
+    .course-number {
+        position: absolute;
+        top: 20px;
+        right: 22px;
+        color: #dce7f2;
+        font-size: 28px;
+        font-weight: 800;
+    }
+
+    .course-card h3 {
+        color: #123c73;
+        font-size: 20px;
+        line-height: 1.35;
+        margin-bottom: 12px;
+        padding-right: 25px;
+    }
+
+    .course-card p {
+        color: #6b7280;
+        font-size: 14px;
+        line-height: 1.7;
+        flex: 1;
+    }
+
+    .course-card button {
+        width: fit-content;
+        border: none;
+        background: #123c73;
+        color: #ffffff;
+        padding: 11px 18px;
+        border-radius: 7px;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.3s;
+        margin-top: 20px;
+    }
+
+    .course-card button:hover {
+        background: #1687e8;
+        transform: translateX(3px);
+    }
+
+    /* ================= HERO ================= */
+
+    .course-page-hero {
+        min-height: 300px;
+
+        background:
+            linear-gradient(
+                rgba(8, 38, 72, 0.82),
+                rgba(8, 38, 72, 0.82)
+            ),
+            url("./images/campus.jpg") center/cover no-repeat;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 50px 6%;
+    }
+
+    .course-page-hero-content {
+        color: #ffffff;
+        max-width: 750px;
+    }
+
+    .course-page-hero-content span {
+        color: #65bdff;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 2px;
+    }
+
+    .course-page-hero-content h1 {
+        font-size: 48px;
+        margin: 10px 0;
+    }
+
+    .course-page-hero-content p {
+        color: #e4edf7;
+        font-size: 16px;
+    }
+
+    /* ================= MODAL ================= */
+
+    .course-modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 20, 40, 0.7);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        z-index: 2000;
+    }
+
+    .course-modal.show {
+        display: flex;
+    }
+
+    .course-modal-box {
+        position: relative;
+        width: 100%;
+        max-width: 560px;
+        background: #ffffff;
+        border-radius: 18px;
+        padding: 40px;
+        text-align: center;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+        animation: modalOpen 0.25s ease;
+    }
+
+    @keyframes modalOpen {
+
+        from {
+            opacity: 0;
+            transform: translateY(20px) scale(0.97);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+    }
+
+    .modal-close {
+        position: absolute;
+        right: 18px;
+        top: 15px;
+        width: 35px;
+        height: 35px;
+        border: none;
+        border-radius: 50%;
+        background: #eef3f8;
+        color: #123c73;
+        font-size: 25px;
+        cursor: pointer;
+    }
+
+    .modal-close:hover {
+        background: #123c73;
+        color: #ffffff;
+    }
+
+    .modal-icon {
+        font-size: 45px;
+        margin-bottom: 10px;
+    }
+
+    #modalCode {
+        display: inline-block;
+        color: #1687e8;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+    }
+
+    #modalTitle {
+        color: #123c73;
+        font-size: 28px;
+        line-height: 1.3;
+        margin-bottom: 15px;
+    }
+
+    #modalDescription {
+        color: #6b7280;
+        font-size: 15px;
+        line-height: 1.7;
+        margin-bottom: 25px;
+    }
+
+    /* BUTTON */
+
+    .btn {
+        display: inline-block;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        font-weight: 700;
+        border-radius: 8px;
+        padding: 12px 22px;
+        transition: 0.3s;
+    }
+
+    .btn-primary {
+        background: #1687e8;
+        color: #ffffff;
+    }
+
+    .btn-primary:hover {
+        background: #0f6fbd;
+        transform: translateY(-2px);
+    }
+
+    /* ================= CTA ================= */
+
+    .courses-cta {
+        background: #123c73;
+        color: #ffffff;
+        padding: 60px 6%;
+    }
+
+    .courses-cta-inner {
+        max-width: 1150px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+    }
+
+    .courses-cta span {
+        color: #65bdff;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 1.5px;
+    }
+
+    .courses-cta h2 {
+        font-size: 32px;
+        margin: 5px 0;
+    }
+
+    .courses-cta p {
+        color: #dce7f2;
+    }
+
+    /* ================= FOOTER ================= */
+
+    .footer {
+        background: #0b1f33;
+        color: #ffffff;
+        padding: 45px 7% 20px;
+    }
+
+    .footer-content {
+        max-width: 1150px;
+        margin: auto;
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 50px;
+    }
+
+    .footer-brand {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .footer-logo img {
+        width: 58px;
+        height: 58px;
+        object-fit: contain;
+    }
+
+    .footer h3 {
+        font-size: 22px;
+        margin-bottom: 7px;
+    }
+
+    .footer-brand p {
+        color: #cbd5e1;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .footer-column {
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+    }
+
+    .footer-column h4 {
+        margin-bottom: 8px;
+        font-size: 16px;
+    }
+
+    .footer-column a {
+        color: #cbd5e1;
+        text-decoration: none;
+        font-size: 14px;
+        transition: 0.3s;
+    }
+
+    .footer-column a:hover {
+        color: #65bdff;
+    }
+
+    .footer-bottom {
+        max-width: 1150px;
+        margin: 30px auto 0;
+        padding-top: 18px;
+        border-top: 1px solid rgba(255,255,255,0.15);
+        text-align: center;
+    }
+
+    .footer-bottom p {
+        color: #94a3b8;
+        font-size: 13px;
+    }
+
+    /* ================= RESPONSIVE ================= */
+
+    @media (max-width: 950px) {
+
+        .course-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .courses-cta-inner {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .footer-content {
+            grid-template-columns: 1fr 1fr;
+        }
+
+    }
+
+    @media (max-width: 600px) {
+
+        .course-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .courses-page {
+            padding: 55px 5%;
+        }
+
+        .course-page-hero-content h1 {
+            font-size: 36px;
+        }
+
+        .course-modal-box {
+            padding: 30px 20px;
+        }
+
+        #modalTitle {
+            font-size: 23px;
+        }
+
+        .courses-cta h2 {
+            font-size: 26px;
+        }
+
+        .footer-content {
+            grid-template-columns: 1fr;
+        }
+
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <div class="logo-section">
+
+        <div class="logo-box">
+            <img src="images/logo.png" alt="MACET Logo">
+        </div>
+
+        <div class="college-name">
+            <h2>MACET</h2>
+            <span>Engineering & Technology</span>
+        </div>
+
+    </div>
+
+
+    <button
+        class="menu-button"
+        onclick="toggleMenu()"
+        type="button">
+        ☰
+    </button>
+
+
+    <nav class="nav-links" id="navLinks">
+
+        <a href="index.html">Home</a>
+
+        <a href="about.html">About</a>
+
+        <a href="courses.html" class="active">
+            Courses
+        </a>
+
+        <a href="admission.html">
+            Admission
+        </a>
+
+        <a href="contact.html">
+            Contact
+        </a>
+
+    </nav>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="course-page-hero">
+
+    <div class="course-page-hero-content">
+
+        <span>ACADEMIC PROGRAMS</span>
+
+        <h1>Our Courses</h1>
+
+        <p>
+            Explore our engineering programs and choose
+            the right path for your future.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= COURSES ================= -->
+
+<section class="courses-page">
+
+    <div class="courses-section-inner">
+
+        <div class="section-heading">
+
+            <span class="section-label">
+                OUR PROGRAMS
+            </span>
+
+            <h2>
+                Engineering Courses
+            </h2>
+
+            <p>
+                Explore our undergraduate engineering programs
+                and build your future with knowledge and innovation.
+            </p>
+
+        </div>
+
+
+        <div class="course-grid">
+
+            <!-- COURSE 01 -->
+
+            <div class="course-card">
+
+                <div class="course-icon">
+                    🤖
+                </div>
+
+                <span class="course-number">
+                    01
+                </span>
+
+                <h3>
+                    Artificial Intelligence & Data Science
+                </h3>
+
+                <p>
+                    AI, Machine Learning, Data Science and
+                    intelligent systems.
+                </p>
+
+                <button
+                    type="button"
+                    onclick="showCourse(
+                        'Artificial Intelligence & Data Science',
+                        'B.Tech • AI & DS',
+                        'This program focuses on Artificial Intelligence, Machine Learning, Data Science, Deep Learning and intelligent applications.'
+                    )">
+
+                    View Details →
+
+                </button>
+
+            </div>
+
+
+            <!-- COURSE 02 -->
+
+            <div class="course-card">
+
+                <div class="course-icon">
+                    💻
+                </div>
+
+                <span class="course-number">
+                    02
+                </span>
+
+                <h3>
+                    Computer Science & Engineering
+                </h3>
+
+                <p>
+                    Programming, software development and
+                    computer technologies.
+                </p>
+
+                <button
+                    type="button"
+                    onclick="showCourse(
+                        'Computer Science & Engineering',
+                        'B.E / B.Tech • CSE',
+                        'This program covers programming, software development, databases, operating systems, computer networks and modern computing technologies.'
+                    )">
+
+                    View Details →
+
+                </button>
+
+            </div>
+
+
+            <!-- COURSE 03 -->
+
+            <div class="course-card">
+
+                <div class="course-icon">
+                    📡
+                </div>
+
+                <span class="course-number">
+                    03
+                </span>
+
+                <h3>
+                    Electronics & Communication Engineering
+                </h3>
+
+                <p>
+                    Electronics, communication, embedded
+                    systems and IoT.
+                </p>
+
+                <button
+                    type="button"
+                    onclick="showCourse(
+                        'Electronics & Communication Engineering',
+                        'B.E • ECE',
+                        'This program focuses on electronics, communication systems, embedded systems, IoT and signal processing.'
+                    )">
+
+                    View Details →
+
+                </button>
+
+            </div>
+
+
+            <!-- COURSE 04 -->
+
+            <div class="course-card">
+
+                <div class="course-icon">
+                    ⚡
+                </div>
+
+                <span class="course-number">
+                    04
+                </span>
+
+                <h3>
+                    Electrical & Electronics Engineering
+                </h3>
+
+                <p>
+                    Electrical systems, power, control and
+                    renewable energy.
+                </p>
+
+                <button
+                    type="button"
+                    onclick="showCourse(
+                        'Electrical & Electronics Engineering',
+                        'B.E • EEE',
+                        'This program covers electrical systems, power generation, electrical machines, control systems and renewable energy.'
+                    )">
+
+                    View Details →
+
+                </button>
+
+            </div>
+
+
+            <!-- COURSE 05 -->
+
+            <div class="course-card">
+
+                <div class="course-icon">
+                    ⚙️
+                </div>
+
+                <span class="course-number">
+                    05
+                </span>
+
+                <h3>
+                    Mechanical Engineering
+                </h3>
+
+                <p>
+                    Machines, manufacturing, design and
+                    automobile technology.
+                </p>
+
+                <button
+                    type="button"
+                    onclick="showCourse(
+                        'Mechanical Engineering',
+                        'B.E • Mechanical',
+                        'This program focuses on machines, manufacturing, thermal engineering, automobile technology, CAD and mechanical design.'
+                    )">
+
+                    View Details →
+
+                </button>
+
+            </div>
+
+
+            <!-- COURSE 06 -->
+
+            <div class="course-card">
+
+                <div class="course-icon">
+                    🏗️
+                </div>
+
+                <span class="course-number">
+                    06
+                </span>
+
+                <h3>
+                    Civil Engineering
+                </h3>
+
+                <p>
+                    Construction, structures, infrastructure
+                    and environmental engineering.
+                </p>
+
+                <button
+                    type="button"
+                    onclick="showCourse(
+                        'Civil Engineering',
+                        'B.E • Civil',
+                        'This program covers structural engineering, construction, transportation, environmental engineering and infrastructure development.'
+                    )">
+
+                    View Details →
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= MODAL ================= -->
+
+<div
+    id="courseModal"
+    class="course-modal">
+
+    <div class="course-modal-box">
+
+        <button
+            class="modal-close"
+            onclick="closeCourse()"
+            type="button">
+
+            ×
+
+        </button>
+
+
+        <div class="modal-icon">
+            🎓
+        </div>
+
+
+        <span id="modalCode"></span>
+
+
+        <h2 id="modalTitle"></h2>
+
+
+        <p id="modalDescription"></p>
+
+
+        <a
+            href="admission.html"
+            class="btn btn-primary">
+
+            Apply Now →
+
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- ================= CTA ================= -->
+
+<section class="courses-cta">
+
+    <div class="courses-cta-inner">
+
+        <div>
+
+            <span>
+                START YOUR JOURNEY
+            </span>
+
+            <h2>
+                Ready to Build Your Future?
+            </h2>
+
+            <p>
+                Take the first step towards your engineering career.
+            </p>
+
+        </div>
+
+
+        <a
+            href="admission.html"
+            class="btn btn-primary">
+
+            Apply Now →
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <div class="footer-content">
+
+        <div class="footer-brand">
+
+            <div class="footer-logo">
+
+                <img
+                    src="images/logo.png"
+                    alt="MACET Logo">
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    MACET
+                </h3>
+
+                <p>
+                    Marthandam College of Engineering
+                    and Technology
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>
+                Quick Links
+            </h4>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="about.html">
+                About
+            </a>
+
+            <a href="courses.html">
+                Courses
+            </a>
+
+            <a href="admission.html">
+                Admission
+            </a>
+
+            <a href="contact.html">
+                Contact
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>
+                Administration
+            </h4>
+
+            <a href="login.html">
+                Admin Login
+            </a>
+
+            <a href="register.html">
+                Admin Register
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <p>
+            ©
+            <span class="current-year"></span>
+            MACET. All Rights Reserved.
+        </p>
+
+    </div>
+
+</footer>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script src="script.js"></script>
+
+<script>
+
+    function showCourse(title, code, description) {
+
+        document.getElementById("modalTitle").textContent = title;
+
+        document.getElementById("modalCode").textContent = code;
+
+        document.getElementById("modalDescription").textContent = description;
+
+        document
+            .getElementById("courseModal")
+            .classList.add("show");
+
+        document.body.style.overflow = "hidden";
+
+    }
+
+
+    function closeCourse() {
+
+        document
+            .getElementById("courseModal")
+            .classList.remove("show");
+
+        document.body.style.overflow = "";
+
+    }
+
+
+    window.addEventListener("click", function(event) {
+
+        const modal =
+            document.getElementById("courseModal");
+
+        if (event.target === modal) {
+
+            closeCourse();
+
+        }
+
+    });
+
+
+    document.addEventListener("keydown", function(event) {
+
+        if (event.key === "Escape") {
+
+            closeCourse();
+
+        }
+
+    });
+
+</script>
+
+</body>
+
+</html>

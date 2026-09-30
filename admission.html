@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admission | MACET</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+    /* ================= ADMISSION PAGE ================= */
+
+    .admission-page {
+        min-height: calc(100vh - 78px);
+        background: #f5f8fc;
+        padding: 70px 6%;
+    }
+
+    .admission-container {
+        max-width: 1000px;
+        margin: auto;
+        background: #ffffff;
+        padding: 45px;
+        border-radius: 18px;
+        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+    }
+
+    /* ================= HEADER ================= */
+
+    .admission-header {
+        text-align: center;
+        margin-bottom: 35px;
+    }
+
+    .admission-header .section-label {
+        display: inline-block;
+        color: #1687e8;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 2px;
+        margin-bottom: 5px;
+    }
+
+    .admission-header h1 {
+        color: #123c73;
+        font-size: 38px;
+        margin: 5px 0 10px;
+    }
+
+    .admission-header p {
+        color: #6b7280;
+        font-size: 15px;
+    }
+
+    /* ================= FORM ================= */
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 22px;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-group.full {
+        grid-column: 1 / -1;
+    }
+
+    .form-group label {
+        color: #24344d;
+        font-weight: 700;
+        font-size: 14px;
+        margin-bottom: 7px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        padding: 13px 14px;
+        border: 1px solid #d8e0ea;
+        border-radius: 8px;
+        outline: none;
+        font-size: 14px;
+        font-family: inherit;
+        background: #ffffff;
+        transition: 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+        border-color: #1687e8;
+        box-shadow: 0 0 0 3px rgba(22, 135, 232, 0.1);
+    }
+
+    .form-group textarea {
+        min-height: 110px;
+        resize: vertical;
+    }
+
+    /* ================= SUBMIT ================= */
+
+    .submit-area {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .submit-btn {
+        border: none;
+        cursor: pointer;
+        padding: 14px 35px;
+        border-radius: 8px;
+        background: #123c73;
+        color: #ffffff;
+        font-size: 15px;
+        font-weight: 700;
+        transition: 0.3s;
+    }
+
+    .submit-btn:hover {
+        background: #1687e8;
+        transform: translateY(-2px);
+    }
+
+    .submit-btn:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    /* ================= MESSAGE ================= */
+
+    #formMessage {
+        min-height: 24px;
+        text-align: center;
+        margin-top: 18px;
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    /* ================= HELPLINE ================= */
+
+    .admission-help {
+        max-width: 1000px;
+        margin: 25px auto 0;
+        background: #eaf5ff;
+        border-left: 4px solid #1687e8;
+        border-radius: 8px;
+        padding: 18px 20px;
+        color: #334155;
+        text-align: center;
+    }
+
+    .admission-help strong {
+        color: #123c73;
+    }
+
+    .admission-help a {
+        color: #1687e8;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    /* ================= RESPONSIVE ================= */
+
+    @media (max-width: 700px) {
+
+        .admission-page {
+            padding: 40px 5%;
+        }
+
+        .admission-container {
+            padding: 25px 20px;
+        }
+
+        .form-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .form-group.full {
+            grid-column: auto;
+        }
+
+        .admission-header h1 {
+            font-size: 30px;
+        }
+
+        .submit-btn {
+            width: 100%;
+        }
+
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <div class="logo-section">
+
+        <div class="logo-box">
+
+            <img
+                src="images/logo.png"
+                alt="MACET Logo">
+
+        </div>
+
+
+        <div class="college-name">
+
+            <h2>MACET</h2>
+
+            <span>
+                Engineering & Technology
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <button
+        class="menu-button"
+        onclick="toggleMenu()"
+        type="button">
+
+        ☰
+
+    </button>
+
+
+    <nav
+        class="nav-links"
+        id="navLinks">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="about.html">
+            About
+        </a>
+
+        <a href="courses.html">
+            Courses
+        </a>
+
+        <a
+            href="admission.html"
+            class="active">
+
+            Admission
+
+        </a>
+
+        <a href="contact.html">
+            Contact
+        </a>
+
+    </nav>
+
+</header>
+
+
+<!-- ================= ADMISSION ================= -->
+
+<main class="admission-page">
+
+    <div class="admission-container">
+
+
+        <!-- HEADER -->
+
+        <div class="admission-header">
+
+            <span class="section-label">
+                ADMISSION 2026
+            </span>
+
+            <h1>
+                Admission Application
+            </h1>
+
+            <p>
+                Fill in your details to begin your admission application.
+            </p>
+
+        </div>
+
+
+        <!-- FORM -->
+
+        <form id="admissionForm">
+
+
+            <div class="form-grid">
+
+
+                <!-- STUDENT NAME -->
+
+                <div class="form-group">
+
+                    <label for="studentName">
+                        Full Name *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="studentName"
+                        name="studentName"
+                        placeholder="Enter your full name"
+                        required>
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address *
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required>
+
+                </div>
+
+
+                <!-- MOBILE -->
+
+                <div class="form-group">
+
+                    <label for="mobile">
+                        Phone Number *
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="mobile"
+                        name="mobile"
+                        placeholder="Enter 10-digit mobile number"
+                        pattern="[0-9]{10}"
+                        maxlength="10"
+                        required>
+
+                </div>
+
+
+                <!-- DOB -->
+
+                <div class="form-group">
+
+                    <label for="dob">
+                        Date of Birth *
+                    </label>
+
+                    <input
+                        type="date"
+                        id="dob"
+                        name="dob"
+                        required>
+
+                </div>
+
+
+                <!-- COURSE -->
+
+                <div class="form-group">
+
+                    <label for="course">
+                        Select Course *
+                    </label>
+
+                    <select
+                        id="course"
+                        name="course"
+                        required>
+
+                        <option value="">
+                            -- Select Course --
+                        </option>
+
+                        <option value="Artificial Intelligence & Data Science">
+                            B.Tech Artificial Intelligence & Data Science
+                        </option>
+
+                        <option value="Computer Science & Engineering">
+                            B.E / B.Tech Computer Science & Engineering
+                        </option>
+
+                        <option value="Electronics & Communication Engineering">
+                            B.E Electronics & Communication Engineering
+                        </option>
+
+                        <option value="Electrical & Electronics Engineering">
+                            B.E Electrical & Electronics Engineering
+                        </option>
+
+                        <option value="Mechanical Engineering">
+                            B.E Mechanical Engineering
+                        </option>
+
+                        <option value="Civil Engineering">
+                            B.E Civil Engineering
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- COMMUNITY -->
+
+                <div class="form-group">
+
+                    <label for="community">
+                        Community *
+                    </label>
+
+                    <select
+                        id="community"
+                        name="community"
+                        required>
+
+                        <option value="">
+                            -- Select Community --
+                        </option>
+
+                        <option value="OC">
+                            OC
+                        </option>
+
+                        <option value="BC">
+                            BC
+                        </option>
+
+                        <option value="BCM">
+                            BCM
+                        </option>
+
+                        <option value="MBC">
+                            MBC
+                        </option>
+
+                        <option value="SC">
+                            SC
+                        </option>
+
+                        <option value="ST">
+                            ST
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- PERCENTAGE -->
+
+                <div class="form-group">
+
+                    <label for="percentage">
+                        Percentage / Marks *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="percentage"
+                        name="percentage"
+                        placeholder="Example: 85%"
+                        required>
+
+                </div>
+
+
+                <!-- YEAR -->
+
+                <div class="form-group">
+
+                    <label for="year">
+                        Admission Year *
+                    </label>
+
+                    <select
+                        id="year"
+                        name="year"
+                        required>
+
+                        <option value="">
+                            -- Select Year --
+                        </option>
+
+                        <option value="2026">
+                            2026
+                        </option>
+
+                        <option value="2027">
+                            2027
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- ADDRESS -->
+
+                <div class="form-group full">
+
+                    <label for="address">
+                        Address
+                    </label>
+
+                    <textarea
+                        id="address"
+                        name="address"
+                        placeholder="Enter your complete address"></textarea>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- MESSAGE -->
+
+            <div id="formMessage"></div>
+
+
+            <!-- SUBMIT -->
+
+            <div class="submit-area">
+
+                <button
+                    type="submit"
+                    class="submit-btn"
+                    id="submitBtn">
+
+                    Submit Application
+
+                </button>
+
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+
+    <!-- HELPLINE -->
+
+    <div class="admission-help">
+
+        <strong>
+            Admission Helpline:
+        </strong>
+
+        +91 97509 76611
+        &nbsp; | &nbsp;
+        +91 98403 53792
+
+        <br>
+
+        <strong>
+            Counseling Code:
+        </strong>
+
+        4984
+
+    </div>
+
+
+</main>
+
+
+<!-- ================= SCRIPT ================= -->
+
+<script src="script.js"></script>
+
+
+<script>
+
+    document
+        .getElementById("admissionForm")
+        .addEventListener("submit", async function (event) {
+
+            event.preventDefault();
+
+
+            const form = this;
+
+            const submitBtn =
+                document.getElementById("submitBtn");
+
+            const message =
+                document.getElementById("formMessage");
+
+
+            const formData =
+                new FormData(form);
+
+
+            const data =
+                Object.fromEntries(
+                    formData.entries()
+                );
+
+
+            submitBtn.disabled = true;
+
+            submitBtn.textContent =
+                "Submitting...";
+
+            message.textContent = "";
+
+            message.style.color = "";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "http://localhost:5000/admission",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify(data)
+                        }
+                    );
+
+
+                const result =
+                    await response.json();
+
+
+                if (response.ok) {
+
+                    message.textContent =
+                        "Application submitted successfully!";
+
+                    message.style.color =
+                        "#15803d";
+
+                    form.reset();
+
+                } else {
+
+                    message.textContent =
+                        result.message ||
+                        "Something went wrong.";
+
+                    message.style.color =
+                        "#dc2626";
+
+                }
+
+
+            } catch (error) {
+
+                console.error(error);
+
+                message.textContent =
+                    "Server connection failed. Please make sure the backend is running.";
+
+                message.style.color =
+                    "#dc2626";
+
+            }
+
+
+            submitBtn.disabled = false;
+
+            submitBtn.textContent =
+                "Submit Application";
+
+        });
+
+</script>
+
+</body>
+
+</html>

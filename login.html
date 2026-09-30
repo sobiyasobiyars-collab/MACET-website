@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Login - MACET</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+    .login-page {
+        min-height: calc(100vh - 78px);
+        background:
+            linear-gradient(
+                rgba(0, 45, 85, 0.78),
+                rgba(0, 45, 85, 0.78)
+            ),
+            url("images/campus.jpg") center/cover no-repeat;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 60px 20px;
+    }
+
+    .login-card {
+        width: 100%;
+        max-width: 440px;
+
+        background: #ffffff;
+
+        padding: 40px;
+
+        border-radius: 20px;
+
+        box-shadow:
+            0 20px 55px rgba(0, 0, 0, 0.25);
+
+        text-align: center;
+
+        box-sizing: border-box;
+    }
+
+    .login-logo {
+        width: 85px;
+        height: 85px;
+
+        margin: 0 auto 18px;
+
+        background: #ffffff;
+
+        border-radius: 50%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        box-shadow:
+            0 5px 18px rgba(0, 0, 0, 0.12);
+
+        overflow: hidden;
+    }
+
+    .login-logo img {
+        width: 72px;
+        height: 72px;
+
+        object-fit: contain;
+    }
+
+    .login-card h1 {
+        color: #003b70;
+
+        font-size: 30px;
+
+        margin: 0 0 8px;
+    }
+
+    .login-subtitle {
+        color: #777777;
+
+        font-size: 14px;
+
+        line-height: 1.6;
+
+        margin-bottom: 30px;
+    }
+
+    .login-form {
+        text-align: left;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+
+        color: #003b70;
+
+        font-size: 14px;
+
+        font-weight: 600;
+
+        margin-bottom: 8px;
+    }
+
+    .input-box {
+        position: relative;
+    }
+
+    .input-icon {
+        position: absolute;
+
+        left: 14px;
+        top: 50%;
+
+        transform: translateY(-50%);
+
+        font-size: 17px;
+
+        z-index: 2;
+    }
+
+    .input-box input {
+        width: 100%;
+
+        box-sizing: border-box;
+
+        padding: 14px 45px 14px 43px;
+
+        border: 1px solid #d7e0ea;
+
+        border-radius: 9px;
+
+        outline: none;
+
+        font-size: 15px;
+
+        background: #ffffff;
+
+        transition: 0.3s;
+    }
+
+    .input-box input:focus {
+        border-color: #0066cc;
+
+        box-shadow:
+            0 0 0 3px rgba(0, 102, 204, 0.10);
+    }
+
+    .show-password {
+        position: absolute;
+
+        right: 12px;
+        top: 50%;
+
+        transform: translateY(-50%);
+
+        border: none;
+
+        background: transparent;
+
+        cursor: pointer;
+
+        font-size: 17px;
+
+        padding: 5px;
+
+        z-index: 2;
+    }
+
+    .login-button {
+        width: 100%;
+
+        padding: 14px;
+
+        margin-top: 5px;
+
+        border: none;
+
+        border-radius: 9px;
+
+        background: #003b70;
+
+        color: #ffffff;
+
+        font-size: 16px;
+
+        font-weight: 700;
+
+        cursor: pointer;
+
+        transition: 0.3s;
+
+        touch-action: manipulation;
+    }
+
+    .login-button:hover {
+        background: #00549c;
+
+        transform: translateY(-2px);
+
+        box-shadow:
+            0 7px 18px rgba(0, 59, 112, 0.25);
+    }
+
+    .login-button:active {
+        transform: scale(0.98);
+    }
+
+    .login-button:disabled {
+        opacity: 0.7;
+
+        cursor: not-allowed;
+
+        transform: none;
+    }
+
+    .login-message {
+        min-height: 22px;
+
+        margin: 14px 0 0;
+
+        font-size: 14px;
+
+        font-weight: 600;
+
+        text-align: center;
+    }
+
+    .register-section {
+        margin-top: 25px;
+
+        padding-top: 20px;
+
+        border-top: 1px solid #e6ebf0;
+    }
+
+    .register-section p {
+        color: #777777;
+
+        font-size: 13px;
+
+        margin: 0 0 8px;
+    }
+
+    .register-section a {
+        color: #0066cc;
+
+        font-size: 14px;
+
+        font-weight: 700;
+
+        text-decoration: none;
+    }
+
+    .register-section a:hover {
+        text-decoration: underline;
+    }
+
+    .back-home {
+        margin-top: 18px;
+    }
+
+    .back-home a {
+        color: #555555;
+
+        font-size: 13px;
+
+        text-decoration: none;
+    }
+
+    .back-home a:hover {
+        color: #0066cc;
+    }
+
+    .security-message {
+        margin-top: 20px;
+
+        padding: 10px;
+
+        background: #f3f8ff;
+
+        border-radius: 8px;
+
+        color: #555555;
+
+        font-size: 12px;
+
+        line-height: 1.5;
+    }
+
+    @media (max-width: 600px) {
+
+        .login-page {
+            min-height: calc(100vh - 70px);
+
+            padding: 30px 15px;
+        }
+
+        .login-card {
+            max-width: 100%;
+
+            padding: 30px 22px;
+
+            border-radius: 16px;
+        }
+
+        .login-card h1 {
+            font-size: 26px;
+        }
+
+        .login-subtitle {
+            margin-bottom: 25px;
+        }
+
+        .input-box input {
+            font-size: 16px;
+
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+
+        .login-button {
+            padding: 15px;
+
+            font-size: 16px;
+
+            min-height: 50px;
+        }
+
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<!-- NAVBAR -->
+
+<header class="navbar">
+
+    <div class="logo-section">
+
+        <div class="logo-box">
+
+            <img
+                src="images/logo.png"
+                alt="MACET Logo"
+            >
+
+        </div>
+
+        <div class="college-name">
+
+            <h2>MACET</h2>
+
+            <span>
+                Engineering & Technology
+            </span>
+
+        </div>
+
+    </div>
+
+    <button
+        class="menu-button"
+        onclick="toggleMenu()"
+        type="button"
+    >
+        ☰
+    </button>
+
+    <nav
+        class="nav-links"
+        id="navLinks"
+    >
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="about.html">
+            About
+        </a>
+
+        <a href="courses.html">
+            Courses
+        </a>
+
+        <a href="admission.html">
+            Admission
+        </a>
+
+        <a href="contact.html">
+            Contact
+        </a>
+
+    </nav>
+
+</header>
+
+
+<!-- LOGIN SECTION -->
+
+<section class="login-page">
+
+    <div class="login-card">
+
+        <!-- LOGO -->
+
+        <div class="login-logo">
+
+            <img
+                src="images/logo.png"
+                alt="MACET Logo"
+            >
+
+        </div>
+
+
+        <!-- TITLE -->
+
+        <h1>
+            Admin Login
+        </h1>
+
+        <p class="login-subtitle">
+            Login to access the MACET administration dashboard.
+        </p>
+
+
+        <!-- LOGIN FORM -->
+
+        <form
+            class="login-form"
+            id="loginForm"
+        >
+
+            <!-- USERNAME -->
+
+            <div class="form-group">
+
+                <label for="username">
+                    Username
+                </label>
+
+                <div class="input-box">
+
+                    <span class="input-icon">
+                        👤
+                    </span>
+
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Enter your username"
+                        required
+                        autocomplete="username"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <div class="input-box">
+
+                    <span class="input-icon">
+                        🔒
+                    </span>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required
+                        autocomplete="current-password"
+                    >
+
+                    <button
+                        type="button"
+                        class="show-password"
+                        id="showPassword"
+                        aria-label="Show password"
+                    >
+                        👁️
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- LOGIN BUTTON -->
+
+            <button
+                type="submit"
+                class="login-button"
+                id="loginButton"
+            >
+                Login
+            </button>
+
+
+            <!-- MESSAGE -->
+
+            <p
+                class="login-message"
+                id="loginMessage"
+            ></p>
+
+        </form>
+
+
+        <!-- REGISTER -->
+
+        <div class="register-section">
+
+            <p>
+                Don't have an admin account?
+            </p>
+
+            <a href="register.html">
+                Create Admin Account
+            </a>
+
+        </div>
+
+
+        <!-- BACK HOME -->
+
+        <div class="back-home">
+
+            <a href="index.html">
+                ← Back to Home
+            </a>
+
+        </div>
+
+
+        <!-- SECURITY -->
+
+        <div class="security-message">
+
+            🔐 Admin access is restricted to authorized users only.
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- JAVASCRIPT -->
+
+<script src="script.js"></script>
+
+<script>
+
+    // SHOW / HIDE PASSWORD
+
+    const showPassword =
+        document.getElementById("showPassword");
+
+    const passwordInput =
+        document.getElementById("password");
+
+    if (showPassword && passwordInput) {
+
+        showPassword.addEventListener(
+            "click",
+            function () {
+
+                if (
+                    passwordInput.type === "password"
+                ) {
+
+                    passwordInput.type = "text";
+
+                    showPassword.textContent = "🙈";
+
+                } else {
+
+                    passwordInput.type = "password";
+
+                    showPassword.textContent = "👁️";
+
+                }
+
+            }
+        );
+
+    }
+
+
+    // ADMIN LOGIN
+
+    const loginForm =
+        document.getElementById("loginForm");
+
+    const loginMessage =
+        document.getElementById("loginMessage");
+
+    const loginButton =
+        document.getElementById("loginButton");
+
+
+    loginForm.addEventListener(
+        "submit",
+        async function (event) {
+
+            event.preventDefault();
+
+            const username =
+                document.getElementById("username").value.trim();
+
+            const password =
+                document.getElementById("password").value;
+
+
+            loginMessage.textContent =
+                "Checking login...";
+
+            loginMessage.style.color =
+                "#0066cc";
+
+            loginButton.disabled = true;
+
+
+            try {
+
+                const response =
+                    await fetch("/admin-login", {
+
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            username: username,
+                            password: password
+                        })
+
+                    });
+
+
+                const data =
+                    await response.json();
+
+
+                if (data.success) {
+
+                    loginMessage.textContent =
+                        "Login successful!";
+
+                    loginMessage.style.color =
+                        "green";
+
+
+                    setTimeout(
+                        function () {
+
+                            window.location.href =
+                                "admin.html";
+
+                        },
+                        700
+                    );
+
+                } else {
+
+                    loginMessage.textContent =
+                        data.message ||
+                        "Invalid username or password.";
+
+                    loginMessage.style.color =
+                        "red";
+
+                    loginButton.disabled = false;
+
+                }
+
+            } catch (error) {
+
+                console.log(
+                    "Login Error:",
+                    error
+                );
+
+                loginMessage.textContent =
+                    "Unable to connect to server.";
+
+                loginMessage.style.color =
+                    "red";
+
+                loginButton.disabled = false;
+
+            }
+
+        }
+    );
+
+</script>
+
+</body>
+
+</html>
