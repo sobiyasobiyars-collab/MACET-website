@@ -1,32 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <url>
-    <loc>https://sobiyasobiyars-collab.github.io/MACET-website/</loc>
-  </url>
+    <url>
+        <loc>https://sobiyasobiyars-collab.github.io/MACET-website/</loc>
+    </url>
 
-  <url>
-    <loc>https://sobiyasobiyars-collab.github.io/MACET-website/about.html</loc>
-  </url>
+    <url>
+        <loc>https://sobiyasobiyars-collab.github.io/MACET-website/about.html</loc>
+    </url>
 
-  <url>
-    <loc>https://sobiyasobiyars-collab.github.io/MACET-website/courses.html</loc>
-  </url>
+    <url>
+        <loc>https://sobiyasobiyars-collab.github.io/MACET-website/courses.html</loc>
+    </url>
 
-  <url>
-    <loc>https://sobiyasobiyars-collab.github.io/MACET-website/admission.html</loc>
-  </url>
+    <url>
+        <loc>https://sobiyasobiyars-collab.github.io/MACET-website/admission.html</loc>
+    </url>
 
-  <url>
-    <loc>https://sobiyasobiyars-collab.github.io/MACET-website/contact.html</loc>
-  </url>
-
-  <url>
-    <loc>https://sobiyasobiyars-collab.github.io/MACET-website/login.html</loc>
-  </url>
-
-  <url>
-    <loc>https://sobiyasobiyars-collab.github.io/MACET-website/register.html</loc>
-  </url>
+    <url>
+        <loc>https://sobiyasobiyars-collab.github.io/MACET-website/contact.html</loc>
+    </url>
 
 </urlset>
