@@ -1,397 +1,374 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>MACET Admin Dashboard</title>
+<title>MACET Admin Dashboard</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
 
-        body {
-            background: #f4f7fb;
-            color: #222;
-        }
+body {
+    background: #f4f7fb;
+    color: #222;
+}
 
-        /* NAVBAR */
-        .navbar {
-            background: #ffffff;
-            min-height: 75px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 5%;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+/* NAVBAR */
+.navbar {
+    background: white;
+    min-height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 5%;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
 
-        .logo-section {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
 
-        .logo-box img {
-            width: 55px;
-            height: 55px;
-            object-fit: contain;
-        }
+.logo-box img {
+    width: 55px;
+    height: 55px;
+    object-fit: contain;
+}
 
-        .college-name h2 {
-            color: #123c75;
-            font-size: 23px;
-        }
+.college-name h2 {
+    color: #123c75;
+}
 
-        .college-name span {
-            color: #666;
-            font-size: 12px;
-        }
+.college-name span {
+    color: #666;
+    font-size: 12px;
+}
 
-        .nav-links {
-            display: flex;
-            gap: 22px;
-            align-items: center;
-        }
+.nav-links {
+    display: flex;
+    gap: 22px;
+}
 
-        .nav-links a {
-            text-decoration: none;
-            color: #333;
-            font-size: 14px;
-            font-weight: 600;
-        }
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    font-size: 14px;
+}
 
-        .nav-links a:hover {
-            color: #0b63ce;
-        }
+.menu-button {
+    display: none;
+    border: none;
+    background: none;
+    font-size: 28px;
+}
 
-        .menu-button {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 28px;
-            cursor: pointer;
-        }
+/* HEADER */
+.dashboard-header {
+    background: linear-gradient(135deg, #0d47a1, #1976d2);
+    color: white;
+    padding: 45px 5%;
+}
 
-        /* HEADER */
-        .dashboard-header {
-            background: linear-gradient(135deg, #0d47a1, #1976d2);
-            color: white;
-            padding: 45px 5%;
-        }
+.dashboard-header h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
 
-        .dashboard-header h1 {
-            font-size: 32px;
-            margin-bottom: 8px;
-        }
+/* MAIN */
+.container {
+    width: 90%;
+    max-width: 1400px;
+    margin: 35px auto;
+}
 
-        .dashboard-header p {
-            opacity: 0.9;
-        }
+.top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
 
-        /* MAIN */
-        .container {
-            width: 90%;
-            max-width: 1400px;
-            margin: 35px auto;
-        }
+.top-row h2 {
+    color: #123c75;
+}
 
-        .top-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
+.buttons {
+    display: flex;
+    gap: 10px;
+}
 
-        .top-row h2 {
-            color: #123c75;
-        }
+button {
+    border: none;
+    cursor: pointer;
+}
 
-        .buttons {
-            display: flex;
-            gap: 10px;
-        }
+.refresh-btn,
+.logout-btn {
+    padding: 10px 18px;
+    border-radius: 7px;
+    color: white;
+    font-weight: bold;
+}
 
-        button {
-            border: none;
-            cursor: pointer;
-        }
+.refresh-btn {
+    background: #1976d2;
+}
 
-        .refresh-btn,
-        .logout-btn {
-            padding: 10px 18px;
-            border-radius: 7px;
-            color: white;
-            font-weight: bold;
-        }
+.logout-btn {
+    background: #dc3545;
+}
 
-        .refresh-btn {
-            background: #1976d2;
-        }
+/* STATS */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
 
-        .logout-btn {
-            background: #dc3545;
-        }
+.stat-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+}
 
-        /* STATS */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-bottom: 30px;
-        }
+.stat-card h3 {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
 
-        .stat-card {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
-        }
+.stat-card h2 {
+    color: #0d47a1;
+    font-size: 28px;
+}
 
-        .stat-card h3 {
-            color: #777;
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
+/* FILTER */
+.filter-box {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    display: flex;
+    gap: 15px;
+}
 
-        .stat-card h2 {
-            color: #0d47a1;
-            font-size: 28px;
-        }
+.filter-box input,
+.filter-box select {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+}
 
-        /* FILTER AREA */
-        .filter-box {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
-            margin-bottom: 25px;
+.search-box,
+.course-filter {
+    flex: 1;
+}
 
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
+/* TABLE */
+.table-container {
+    background: white;
+    border-radius: 12px;
+    overflow-x: auto;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+}
 
-        .search-box,
-        .course-filter {
-            flex: 1;
-            min-width: 220px;
-        }
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1100px;
+}
 
-        .filter-box input,
-        .filter-box select {
-            width: 100%;
-            padding: 13px;
-            border: 1px solid #ddd;
-            border-radius: 7px;
-            font-size: 14px;
-            outline: none;
-        }
+th {
+    background: #0d47a1;
+    color: white;
+    padding: 14px;
+    text-align: left;
+}
 
-        .filter-box input:focus,
-        .filter-box select:focus {
-            border-color: #1976d2;
-        }
+td {
+    padding: 13px;
+    border-bottom: 1px solid #eee;
+}
 
-        /* TABLE */
-        .table-container {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
-            overflow-x: auto;
-        }
+.view-btn {
+    background: #198754;
+    color: white;
+    padding: 7px 12px;
+    border-radius: 5px;
+}
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 1100px;
-        }
+.delete-btn {
+    background: #dc3545;
+    color: white;
+    padding: 7px 12px;
+    border-radius: 5px;
+}
 
-        th {
-            background: #0d47a1;
-            color: white;
-            padding: 14px;
-            text-align: left;
-            font-size: 13px;
-        }
+.no-data {
+    text-align: center;
+    padding: 30px;
+    color: #777;
+}
 
-        td {
-            padding: 13px;
-            border-bottom: 1px solid #eee;
-            font-size: 13px;
-        }
+/* CONTACT MESSAGES */
+.contact-section {
+    margin-top: 45px;
+}
 
-        tr:hover {
-            background: #f7faff;
-        }
+.contact-section h2 {
+    color: #123c75;
+    margin-bottom: 20px;
+}
 
-        .view-btn {
-            background: #198754;
-            color: white;
-            padding: 7px 12px;
-            border-radius: 5px;
-            margin-right: 5px;
-        }
+.contact-card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+}
 
-        .delete-btn {
-            background: #dc3545;
-            color: white;
-            padding: 7px 12px;
-            border-radius: 5px;
-        }
+.contact-card h3 {
+    color: #0d47a1;
+    margin-bottom: 8px;
+}
 
-        .no-data {
-            text-align: center;
-            padding: 30px;
-            color: #777;
-        }
+.contact-card p {
+    margin: 7px 0;
+}
 
-        /* MODAL */
-        .modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.6);
-            z-index: 500;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
+.contact-delete {
+    background: #dc3545;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    margin-top: 10px;
+}
 
-        .modal.show {
-            display: flex;
-        }
+/* MODAL */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 500;
+}
 
-        .modal-content {
-            background: white;
-            width: 100%;
-            max-width: 650px;
-            max-height: 90vh;
-            overflow-y: auto;
-            border-radius: 15px;
-            padding: 30px;
-            position: relative;
-        }
+.modal.show {
+    display: flex;
+}
 
-        .modal-content h2 {
-            color: #0d47a1;
-            margin-bottom: 20px;
-        }
+.modal-content {
+    background: white;
+    width: 100%;
+    max-width: 650px;
+    padding: 30px;
+    border-radius: 15px;
+    position: relative;
+}
 
-        .close-btn {
-            position: absolute;
-            right: 20px;
-            top: 15px;
-            font-size: 28px;
-            background: none;
-            color: #555;
-        }
+.close-btn {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 28px;
+    background: none;
+}
 
-        .detail-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
 
-        .detail {
-            background: #f5f7fa;
-            padding: 13px;
-            border-radius: 7px;
-        }
+.detail {
+    background: #f5f7fa;
+    padding: 13px;
+    border-radius: 7px;
+}
 
-        .detail.full {
-            grid-column: 1 / -1;
-        }
+.detail.full {
+    grid-column: 1 / -1;
+}
 
-        .detail strong {
-            display: block;
-            color: #555;
-            font-size: 12px;
-            margin-bottom: 5px;
-        }
+.detail strong {
+    display: block;
+    color: #555;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
 
-        .detail span {
-            color: #222;
-            font-size: 14px;
-        }
+/* FOOTER */
+footer {
+    margin-top: 50px;
+    background: #0d47a1;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
 
-        /* FOOTER */
-        footer {
-            margin-top: 50px;
-            background: #0d47a1;
-            color: white;
-            text-align: center;
-            padding: 25px;
-        }
+/* MOBILE */
+@media(max-width:900px) {
 
-        /* MOBILE */
-        @media (max-width: 900px) {
-            .menu-button {
-                display: block;
-            }
+    .menu-button {
+        display: block;
+    }
 
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 75px;
-                left: 0;
-                right: 0;
-                background: white;
-                flex-direction: column;
-                padding: 20px;
-                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-            }
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 75px;
+        left: 0;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        padding: 20px;
+    }
 
-            .nav-links.show-menu {
-                display: flex;
-            }
+    .nav-links.show-menu {
+        display: flex;
+    }
 
-            .stats {
-                grid-template-columns: 1fr;
-            }
+    .stats {
+        grid-template-columns: 1fr;
+    }
 
-            .top-row {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-        }
+    .filter-box {
+        flex-direction: column;
+    }
 
-        @media (max-width: 600px) {
-            .dashboard-header h1 {
-                font-size: 25px;
-            }
+    .top-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+}
 
-            .container {
-                width: 94%;
-            }
+@media(max-width:600px) {
 
-            .detail-grid {
-                grid-template-columns: 1fr;
-            }
+    .detail-grid {
+        grid-template-columns: 1fr;
+    }
 
-            .detail.full {
-                grid-column: auto;
-            }
-
-            .buttons {
-                width: 100%;
-            }
-
-            .refresh-btn,
-            .logout-btn {
-                flex: 1;
-            }
-        }
-    </style>
+    .detail.full {
+        grid-column: auto;
+    }
+}
+</style>
 </head>
 
 <body>
@@ -399,632 +376,812 @@
 <!-- NAVBAR -->
 <header class="navbar">
 
-    <div class="logo-section">
+<div class="logo-section">
 
-        <div class="logo-box">
-            <img src="images/logo.png" alt="MACET Logo">
-        </div>
+<div class="logo-box">
+<img src="images/logo.png" alt="MACET Logo">
+</div>
 
-        <div class="college-name">
-            <h2>MACET</h2>
-            <span>Engineering & Technology</span>
-        </div>
+<div class="college-name">
+<h2>MACET</h2>
+<span>Engineering & Technology</span>
+</div>
 
-    </div>
+</div>
 
-    <button class="menu-button" onclick="toggleMenu()">☰</button>
+<button class="menu-button" onclick="toggleMenu()">☰</button>
 
-    <nav class="nav-links" id="navLinks">
-
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="courses.html">Courses</a>
-        <a href="admission.html">Admission</a>
-        <a href="contact.html">Contact</a>
-        <a href="login.html">Logout</a>
-
-    </nav>
+<nav class="nav-links" id="navLinks">
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="courses.html">Courses</a>
+<a href="admission.html">Admission</a>
+<a href="contact.html">Contact</a>
+<a href="login.html">Logout</a>
+</nav>
 
 </header>
 
 
-<!-- DASHBOARD HEADER -->
+<!-- HEADER -->
 <section class="dashboard-header">
 
-    <h1>Admin Dashboard</h1>
+<h1>Admin Dashboard</h1>
 
-    <p>
-        Manage and view student admission applications
-    </p>
+<p>Manage and view student admission applications and contact messages</p>
 
 </section>
 
 
-<!-- MAIN -->
 <main class="container">
 
-    <div class="top-row">
+<!-- TOP -->
+<div class="top-row">
 
-        <h2>Admission Applications</h2>
+<h2>Admission Applications</h2>
 
-        <div class="buttons">
+<div class="buttons">
 
-            <button class="refresh-btn" onclick="loadAdmissions()">
-                🔄 Refresh
-            </button>
+<button class="refresh-btn" onclick="refreshAll()">
+🔄 Refresh
+</button>
 
-            <button class="logout-btn" onclick="logout()">
-                Logout
-            </button>
+<button class="logout-btn" onclick="logout()">
+Logout
+</button>
 
-        </div>
-
-    </div>
-
-
-    <!-- STATS -->
-    <div class="stats">
-
-        <div class="stat-card">
-
-            <h3>Total Applications</h3>
-
-            <h2 id="totalCount">0</h2>
-
-        </div>
-
-
-        <div class="stat-card">
-
-            <h3>Institution</h3>
-
-            <h2>MACET</h2>
-
-        </div>
-
-
-        <div class="stat-card">
-
-            <h3>Dashboard Status</h3>
-
-            <h2>Active</h2>
-
-        </div>
-
-    </div>
-
-
-    <!-- SEARCH & FILTER -->
-    <div class="filter-box">
-
-        <div class="search-box">
-
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="🔎 Search by name, email or mobile..."
-                oninput="filterAdmissions()"
-            >
-
-        </div>
-
-
-        <div class="course-filter">
-
-            <select id="courseFilter" onchange="filterAdmissions()">
-
-                <option value="">🎓 All Courses</option>
-
-                <option value="Artificial Intelligence & Data Science">
-                    Artificial Intelligence & Data Science
-                </option>
-
-                <option value="Computer Science & Engineering">
-                    Computer Science & Engineering
-                </option>
-
-                <option value="Electronics & Communication Engineering">
-                    Electronics & Communication Engineering
-                </option>
-
-                <option value="Electrical & Electronics Engineering">
-                    Electrical & Electronics Engineering
-                </option>
-
-                <option value="Mechanical Engineering">
-                    Mechanical Engineering
-                </option>
-
-                <option value="Civil Engineering">
-                    Civil Engineering
-                </option>
-
-            </select>
-
-        </div>
-
-    </div>
-
-
-    <!-- TABLE -->
-    <div class="table-container">
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>S.No</th>
-                    <th>Student Name</th>
-                    <th>Email</th>
-                    <th>Mobile</th>
-                    <th>DOB</th>
-                    <th>Course</th>
-                    <th>Community</th>
-                    <th>Percentage</th>
-                    <th>Year</th>
-                    <th>Address</th>
-                    <th>Action</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody id="admissionTable">
-
-                <tr>
-                    <td colspan="11" class="no-data">
-                        Loading applications...
-                    </td>
-                </tr>
-
-            </tbody>
-
-        </table>
-
-    </div>
-
-</main>
-
-
-<!-- VIEW DETAILS MODAL -->
-<div class="modal" id="detailsModal">
-
-    <div class="modal-content">
-
-        <button class="close-btn" onclick="closeDetails()">
-            ×
-        </button>
-
-        <h2>Student Admission Details</h2>
-
-        <div class="detail-grid">
-
-            <div class="detail">
-                <strong>Student Name</strong>
-                <span id="detailName">-</span>
-            </div>
-
-            <div class="detail">
-                <strong>Email</strong>
-                <span id="detailEmail">-</span>
-            </div>
-
-            <div class="detail">
-                <strong>Mobile</strong>
-                <span id="detailMobile">-</span>
-            </div>
-
-            <div class="detail">
-                <strong>Date of Birth</strong>
-                <span id="detailDob">-</span>
-            </div>
-
-            <div class="detail">
-                <strong>Course</strong>
-                <span id="detailCourse">-</span>
-            </div>
-
-            <div class="detail">
-                <strong>Community</strong>
-                <span id="detailCommunity">-</span>
-            </div>
-
-            <div class="detail">
-                <strong>Percentage</strong>
-                <span id="detailPercentage">-</span>
-            </div>
-
-            <div class="detail">
-                <strong>Year</strong>
-                <span id="detailYear">-</span>
-            </div>
-
-            <div class="detail full">
-                <strong>Address</strong>
-                <span id="detailAddress">-</span>
-            </div>
-
-        </div>
-
-    </div>
+</div>
 
 </div>
 
 
-<!-- FOOTER -->
+<!-- STATS -->
+<div class="stats">
+
+<div class="stat-card">
+<h3>Total Applications</h3>
+<h2 id="totalCount">0</h2>
+</div>
+
+<div class="stat-card">
+<h3>Institution</h3>
+<h2>MACET</h2>
+</div>
+
+<div class="stat-card">
+<h3>Dashboard Status</h3>
+<h2>Active</h2>
+</div>
+
+</div>
+
+
+<!-- FILTER -->
+<div class="filter-box">
+
+<div class="search-box">
+
+<input
+type="text"
+id="searchInput"
+placeholder="🔎 Search by name, email or mobile..."
+oninput="filterAdmissions()"
+>
+
+</div>
+
+<div class="course-filter">
+
+<select id="courseFilter" onchange="filterAdmissions()">
+
+<option value="">🎓 All Courses</option>
+
+<option value="Artificial Intelligence & Data Science">
+Artificial Intelligence & Data Science
+</option>
+
+<option value="Computer Science & Engineering">
+Computer Science & Engineering
+</option>
+
+<option value="Electronics & Communication Engineering">
+Electronics & Communication Engineering
+</option>
+
+<option value="Electrical & Electronics Engineering">
+Electrical & Electronics Engineering
+</option>
+
+<option value="Mechanical Engineering">
+Mechanical Engineering
+</option>
+
+<option value="Civil Engineering">
+Civil Engineering
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<!-- ADMISSION TABLE -->
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+<th>S.No</th>
+<th>Student Name</th>
+<th>Email</th>
+<th>Mobile</th>
+<th>DOB</th>
+<th>Course</th>
+<th>Community</th>
+<th>Percentage</th>
+<th>Year</th>
+<th>Address</th>
+<th>Action</th>
+</tr>
+
+</thead>
+
+<tbody id="admissionTable">
+
+<tr>
+<td colspan="11" class="no-data">
+Loading applications...
+</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+
+<!-- CONTACT MESSAGES -->
+<section class="contact-section">
+
+<h2>Contact Messages</h2>
+
+<div id="contactMessages">
+
+<p class="no-data">
+Loading contact messages...
+</p>
+
+</div>
+
+</section>
+
+</main>
+
+
+<!-- DETAILS MODAL -->
+<div class="modal" id="detailsModal">
+
+<div class="modal-content">
+
+<button class="close-btn" onclick="closeDetails()">×</button>
+
+<h2>Student Admission Details</h2>
+
+<div class="detail-grid">
+
+<div class="detail">
+<strong>Student Name</strong>
+<span id="detailName">-</span>
+</div>
+
+<div class="detail">
+<strong>Email</strong>
+<span id="detailEmail">-</span>
+</div>
+
+<div class="detail">
+<strong>Mobile</strong>
+<span id="detailMobile">-</span>
+</div>
+
+<div class="detail">
+<strong>Date of Birth</strong>
+<span id="detailDob">-</span>
+</div>
+
+<div class="detail">
+<strong>Course</strong>
+<span id="detailCourse">-</span>
+</div>
+
+<div class="detail">
+<strong>Community</strong>
+<span id="detailCommunity">-</span>
+</div>
+
+<div class="detail">
+<strong>Percentage</strong>
+<span id="detailPercentage">-</span>
+</div>
+
+<div class="detail">
+<strong>Year</strong>
+<span id="detailYear">-</span>
+</div>
+
+<div class="detail full">
+<strong>Address</strong>
+<span id="detailAddress">-</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
 <footer>
 
-    <p>
-        © <span class="current-year"></span>
-        Marthandam College of Engineering and Technology
-    </p>
+<p>
+© <span class="current-year"></span>
+Marthandam College of Engineering and Technology
+</p>
 
 </footer>
 
 
 <script>
 
-    let allAdmissions = [];
+const BACKEND_URL =
+"https://macet-backend.onrender.com";
 
+let allAdmissions = [];
 
-    /* MOBILE MENU */
 
-    function toggleMenu() {
+/* MOBILE MENU */
 
-        const nav = document.getElementById("navLinks");
+function toggleMenu() {
 
-        nav.classList.toggle("show-menu");
+document
+.getElementById("navLinks")
+.classList.toggle("show-menu");
 
-    }
+}
 
 
-    /* LOAD ADMISSIONS */
+/* LOAD ADMISSIONS */
 
-    async function loadAdmissions() {
+async function loadAdmissions() {
 
-        const table = document.getElementById("admissionTable");
+const table =
+document.getElementById("admissionTable");
 
-        table.innerHTML = `
-            <tr>
-                <td colspan="11" class="no-data">
-                    Loading applications...
-                </td>
-            </tr>
-        `;
+table.innerHTML = `
+<tr>
+<td colspan="11" class="no-data">
+Loading applications...
+</td>
+</tr>
+`;
 
-        try {
+try {
 
-            const response = await fetch("https://macet-backend.onrender.com/api/admissions");
+const response =
+await fetch(
+BACKEND_URL + "/api/admissions"
+);
 
-            if (!response.ok) {
-                throw new Error("Failed to fetch admissions");
-            }
+if (!response.ok) {
+throw new Error("Failed to fetch admissions");
+}
 
-            allAdmissions = await response.json();
+allAdmissions =
+await response.json();
 
-            document.getElementById("totalCount").textContent =
-                allAdmissions.length;
+document.getElementById("totalCount")
+.textContent =
+allAdmissions.length;
 
-            displayAdmissions(allAdmissions);
+displayAdmissions(allAdmissions);
 
-        } catch (error) {
+} catch(error) {
 
-            console.error(error);
+console.error(error);
 
-            table.innerHTML = `
-                <tr>
-                    <td colspan="11" class="no-data">
-                        ❌ Unable to load admission applications.
-                    </td>
-                </tr>
-            `;
+table.innerHTML = `
+<tr>
+<td colspan="11" class="no-data">
+❌ Unable to load admission applications.
+</td>
+</tr>
+`;
 
-        }
+}
 
-    }
+}
 
 
-    /* DISPLAY DATA */
+/* DISPLAY ADMISSIONS */
 
-    function displayAdmissions(data) {
+function displayAdmissions(data) {
 
-        const table = document.getElementById("admissionTable");
+const table =
+document.getElementById("admissionTable");
 
-        table.innerHTML = "";
+table.innerHTML = "";
 
-        if (data.length === 0) {
+if(data.length === 0) {
 
-            table.innerHTML = `
-                <tr>
-                    <td colspan="11" class="no-data">
-                        No applications found.
-                    </td>
-                </tr>
-            `;
+table.innerHTML = `
+<tr>
+<td colspan="11" class="no-data">
+No applications found.
+</td>
+</tr>
+`;
 
-            return;
+return;
 
-        }
+}
 
+data.forEach((student,index) => {
 
-        data.forEach((student, index) => {
+const row =
+document.createElement("tr");
 
-            const row = document.createElement("tr");
+row.innerHTML = `
 
-            row.innerHTML = `
+<td>${index + 1}</td>
 
-                <td>${index + 1}</td>
+<td>${escapeHTML(student.studentName)}</td>
 
-                <td>${escapeHTML(student.studentName)}</td>
+<td>${escapeHTML(student.email)}</td>
 
-                <td>${escapeHTML(student.email)}</td>
+<td>${escapeHTML(student.mobile)}</td>
 
-                <td>${escapeHTML(student.mobile)}</td>
+<td>${escapeHTML(student.dob)}</td>
 
-                <td>${escapeHTML(student.dob)}</td>
+<td>${escapeHTML(student.course)}</td>
 
-                <td>${escapeHTML(student.course)}</td>
+<td>${escapeHTML(student.community)}</td>
 
-                <td>${escapeHTML(student.community)}</td>
+<td>${escapeHTML(student.percentage)}</td>
 
-                <td>${escapeHTML(student.percentage)}</td>
+<td>${escapeHTML(student.year)}</td>
 
-                <td>${escapeHTML(student.year)}</td>
+<td>${escapeHTML(student.address)}</td>
 
-                <td>${escapeHTML(student.address)}</td>
+<td>
 
-                <td>
+<button
+class="view-btn"
+onclick="viewDetails('${student._id}')">
+View
+</button>
 
-                    <button
-                        class="view-btn"
-                        onclick="viewDetails('${student._id}')"
-                    >
-                        View
-                    </button>
+<button
+class="delete-btn"
+onclick="deleteAdmission('${student._id}')">
+Delete
+</button>
 
-                    <button
-                        class="delete-btn"
-                        onclick="deleteAdmission('${student._id}')"
-                    >
-                        Delete
-                    </button>
+</td>
+`;
 
-                </td>
+table.appendChild(row);
 
-            `;
+});
 
-            table.appendChild(row);
+}
 
-        });
 
-    }
+/* SEARCH */
 
+function filterAdmissions() {
 
-    /* SEARCH + COURSE FILTER */
+const search =
+document
+.getElementById("searchInput")
+.value
+.toLowerCase()
+.trim();
 
-    function filterAdmissions() {
+const course =
+document.getElementById("courseFilter").value;
 
-        const search =
-            document
-                .getElementById("searchInput")
-                .value
-                .toLowerCase()
-                .trim();
+const filtered =
+allAdmissions.filter(student => {
 
-        const course =
-            document
-                .getElementById("courseFilter")
-                .value;
+const matchesSearch =
 
+(student.studentName || "")
+.toLowerCase()
+.includes(search)
 
-        const filtered = allAdmissions.filter(student => {
+||
 
-            const matchesSearch =
-                (student.studentName || "")
-                    .toLowerCase()
-                    .includes(search)
+(student.email || "")
+.toLowerCase()
+.includes(search)
 
-                ||
+||
 
-                (student.email || "")
-                    .toLowerCase()
-                    .includes(search)
+(student.mobile || "")
+.toLowerCase()
+.includes(search);
 
-                ||
+const matchesCourse =
+course === "" ||
+student.course === course;
 
-                (student.mobile || "")
-                    .toLowerCase()
-                    .includes(search);
+return matchesSearch && matchesCourse;
 
+});
 
-            const matchesCourse =
-                course === "" ||
-                student.course === course;
+displayAdmissions(filtered);
 
+}
 
-            return matchesSearch && matchesCourse;
 
-        });
+/* VIEW DETAILS */
 
+function viewDetails(id) {
 
-        displayAdmissions(filtered);
+const student =
+allAdmissions.find(
+item => item._id === id
+);
 
-    }
+if(!student) return;
 
+document.getElementById("detailName")
+.textContent =
+student.studentName || "-";
 
-    /* VIEW DETAILS */
+document.getElementById("detailEmail")
+.textContent =
+student.email || "-";
 
-    function viewDetails(id) {
+document.getElementById("detailMobile")
+.textContent =
+student.mobile || "-";
 
-        const student =
-            allAdmissions.find(item => item._id === id);
+document.getElementById("detailDob")
+.textContent =
+student.dob || "-";
 
-        if (!student) {
-            return;
-        }
+document.getElementById("detailCourse")
+.textContent =
+student.course || "-";
 
+document.getElementById("detailCommunity")
+.textContent =
+student.community || "-";
 
-        document.getElementById("detailName").textContent =
-            student.studentName || "-";
+document.getElementById("detailPercentage")
+.textContent =
+student.percentage || "-";
 
-        document.getElementById("detailEmail").textContent =
-            student.email || "-";
+document.getElementById("detailYear")
+.textContent =
+student.year || "-";
 
-        document.getElementById("detailMobile").textContent =
-            student.mobile || "-";
+document.getElementById("detailAddress")
+.textContent =
+student.address || "-";
 
-        document.getElementById("detailDob").textContent =
-            student.dob || "-";
+document
+.getElementById("detailsModal")
+.classList.add("show");
 
-        document.getElementById("detailCourse").textContent =
-            student.course || "-";
+}
 
-        document.getElementById("detailCommunity").textContent =
-            student.community || "-";
 
-        document.getElementById("detailPercentage").textContent =
-            student.percentage || "-";
+/* CLOSE MODAL */
 
-        document.getElementById("detailYear").textContent =
-            student.year || "-";
+function closeDetails() {
 
-        document.getElementById("detailAddress").textContent =
-            student.address || "-";
+document
+.getElementById("detailsModal")
+.classList.remove("show");
 
+}
 
-        document
-            .getElementById("detailsModal")
-            .classList.add("show");
 
-    }
+/* DELETE ADMISSION */
 
+async function deleteAdmission(id) {
 
-    /* CLOSE DETAILS */
+if(!confirm(
+"Are you sure you want to delete this application?"
+)) return;
 
-    function closeDetails() {
+try {
 
-        document
-            .getElementById("detailsModal")
-            .classList.remove("show");
+const response =
+await fetch(
+BACKEND_URL +
+"/api/admissions/" +
+id,
+{
+method: "DELETE"
+}
+);
 
-    }
+const result =
+await response.json();
 
+if(response.ok) {
 
-    /* DELETE */
+alert(
+result.message ||
+"Application deleted successfully!"
+);
 
-    async function deleteAdmission(id) {
+loadAdmissions();
 
-        const confirmDelete =
-            confirm("Are you sure you want to delete this application?");
+} else {
 
-        if (!confirmDelete) {
-            return;
-        }
+alert(
+result.message ||
+"Unable to delete application."
+);
 
+}
 
-        try {
+} catch(error) {
 
-            const response =
-                await fetch("https://macet-backend.onrender.com/api/admissions/" + id, {
-                    method: "DELETE"
-                });
+console.error(error);
 
+alert("Server connection error.");
 
-            const result = await response.json();
+}
 
+}
 
-            if (response.ok) {
 
-                alert(
-                    result.message ||
-                    "Application deleted successfully!"
-                );
+/* LOAD CONTACTS */
 
-                loadAdmissions();
+async function loadContacts() {
 
-            } else {
+const container =
+document.getElementById("contactMessages");
 
-                alert(
-                    result.message ||
-                    "Unable to delete application."
-                );
+container.innerHTML = `
+<p class="no-data">
+Loading contact messages...
+</p>
+`;
 
-            }
+try {
 
-        } catch (error) {
+const response =
+await fetch(
+BACKEND_URL + "/api/contacts"
+);
 
-            console.error(error);
+if(!response.ok) {
+throw new Error("Failed to fetch contacts");
+}
 
-            alert("Server connection error.");
+const contacts =
+await response.json();
 
-        }
+if(contacts.length === 0) {
 
-    }
+container.innerHTML = `
+<p class="no-data">
+No contact messages found.
+</p>
+`;
 
+return;
 
-    /* LOGOUT */
+}
 
-    function logout() {
+container.innerHTML = "";
 
-        window.location.href = "login.html";
+contacts.forEach(contact => {
 
-    }
+const card =
+document.createElement("div");
 
+card.className =
+"contact-card";
 
-    /* ESCAPE HTML */
+card.innerHTML = `
 
-    function escapeHTML(value) {
+<h3>${escapeHTML(contact.subject || "No Subject")}</h3>
 
-        if (value === undefined || value === null) {
-            return "";
-        }
+<p>
+<strong>Name:</strong>
+${escapeHTML(contact.name)}
+</p>
 
-        return String(value)
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
+<p>
+<strong>Email:</strong>
+${escapeHTML(contact.email)}
+</p>
 
-    }
+<p>
+<strong>Message:</strong>
+${escapeHTML(contact.message)}
+</p>
 
+<button
+class="contact-delete"
+onclick="deleteContact('${contact._id}')">
+Delete Message
+</button>
 
-    /* CLOSE MODAL WHEN CLICKING OUTSIDE */
+`;
 
-    window.addEventListener("click", function(event) {
+container.appendChild(card);
 
-        const modal =
-            document.getElementById("detailsModal");
+});
 
-        if (event.target === modal) {
-            closeDetails();
-        }
+} catch(error) {
 
-    });
+console.error(error);
 
+container.innerHTML = `
+<p class="no-data">
+❌ Unable to load contact messages.
+</p>
+`;
 
-    /* ESC KEY */
+}
 
-    document.addEventListener("keydown", function(event) {
+}
 
-        if (event.key === "Escape") {
-            closeDetails();
-        }
 
-    });
+/* DELETE CONTACT */
 
+async function deleteContact(id) {
 
-    /* CURRENT YEAR */
+if(!confirm(
+"Are you sure you want to delete this message?"
+)) return;
 
-    document.querySelector(".current-year").textContent =
-        new Date().getFullYear();
+try {
 
+const response =
+await fetch(
+BACKEND_URL +
+"/api/contacts/" +
+id,
+{
+method: "DELETE"
+}
+);
 
-    /* LOAD DATA WHEN PAGE OPENS */
+const result =
+await response.json();
 
-    loadAdmissions();
+if(response.ok) {
+
+alert(
+result.message ||
+"Contact message deleted successfully!"
+);
+
+loadContacts();
+
+} else {
+
+alert(
+result.message ||
+"Unable to delete contact message."
+);
+
+}
+
+} catch(error) {
+
+console.error(error);
+
+alert("Server connection error.");
+
+}
+
+}
+
+
+/* REFRESH */
+
+function refreshAll() {
+
+loadAdmissions();
+loadContacts();
+
+}
+
+
+/* LOGOUT */
+
+function logout() {
+
+window.location.href =
+"login.html";
+
+}
+
+
+/* ESCAPE HTML */
+
+function escapeHTML(value) {
+
+if(value === undefined ||
+value === null) {
+
+return "";
+
+}
+
+return String(value)
+
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+/* CLOSE MODAL OUTSIDE */
+
+window.addEventListener(
+"click",
+function(event) {
+
+const modal =
+document.getElementById(
+"detailsModal"
+);
+
+if(event.target === modal) {
+
+closeDetails();
+
+}
+
+});
+
+
+/* ESC KEY */
+
+document.addEventListener(
+"keydown",
+function(event) {
+
+if(event.key === "Escape") {
+
+closeDetails();
+
+}
+
+});
+
+
+/* YEAR */
+
+document.querySelector(
+".current-year"
+).textContent =
+new Date().getFullYear();
+
+
+/* LOAD */
+
+loadAdmissions();
+loadContacts();
 
 </script>
 
