@@ -1,4 +1,4 @@
-```html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -696,7 +696,7 @@
 
         try {
 
-            const response = await fetch("/api/admissions");
+            const response = await fetch("https://macet-backend.onrender.com/api/admissions");
 
             if (!response.ok) {
                 throw new Error("Failed to fetch admissions");
@@ -927,8 +927,8 @@
         try {
 
             const response =
-                await fetch("/api/admissions/" + id, {
-                    method: "DELETE"
+                await fetch("https://macet-backend.onrender.com/api/admissions/" + id, {
+    method: "DELETE"
                 });
 
 
