@@ -389,19 +389,58 @@
 <!-- CONTACT FORM SCRIPT -->
 <script>
 
-    document
-        .getElementById("contactForm")
-        .addEventListener("submit", function(event) {
+document.getElementById("contactForm").addEventListener("submit", async function(event) {
 
-            event.preventDefault();
+    event.preventDefault();
 
-            document.getElementById("successMessage")
-                .textContent =
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const phone = document.getElementById("phone").value;
+    const subject = document.getElementById("subject").value;
+    const message = document.getElementById("message").value;
+
+    try {
+
+        const response = await fetch("https://macet-backend.onrender.com/contact", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: name,
+                email: email,
+                phone: phone,
+                subject: subject,
+                message: message
+            })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+
+            document.getElementById("successMessage").textContent =
                 "✅ Thank you! Your message has been received.";
 
             this.reset();
 
-        });
+        } else {
+
+            document.getElementById("successMessage").textContent =
+                "❌ Something went wrong. Please try again.";
+
+        }
+
+    } catch (error) {
+
+        console.error(error);
+
+        document.getElementById("successMessage").textContent =
+            "❌ Unable to connect to server.";
+
+    }
+
+});
 
 </script>
 
